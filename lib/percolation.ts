@@ -248,3 +248,95 @@ export const DAY_LABELS: Record<string, string> = {
   "2026-02-21": "Day 2 - Transition",
   "2026-02-22": "Day 3 - Observer Crisis",
 };
+
+// BMS 4.0 Protocol - Activity Parser
+export interface ActivityNode {
+  id: string;
+  name: string;
+  type: "Operator" | "Observer";
+}
+
+export interface ActivityResults {
+  nodes: ActivityNode[];
+  opCount: number;
+  obsCount: number;
+  couplingStrength: number;
+  systemStatus: string;
+}
+
+export function parseMyActivityText(text: string): string {
+  const lines = text.split("\n");
+  let csv = "timestamp,action,file_id,file_name\n";
+  const now = new Date().toISOString();
+
+  lines.forEach((line) => {
+    const match = line.match(
+      /(viewed|opened|edited|created|uploaded|shared|modified)\s+(.+)/i
+    );
+    if (match) {
+      const action = match[1].toLowerCase();
+      const fileName = match[2].trim();
+      const fileId = fileName.replace(/\s+/g, "_").toLowerCase().substring(0, 20);
+      csv += `${now},${action},${fileId},"${fileName}"\n`;
+    }
+  });
+  return csv;
+}
+
+export function runActivitySimulation(
+  text: string,
+  observations: number,
+  operations: number
+): ActivityResults {
+  const csv = text.includes("timestamp") ? text : parseMyActivityText(text);
+  const lines = csv.trim().split("\n");
+  if (lines.length < 2) throw new Error("No substrate signals detected.");
+
+  const events = lines.slice(1).map((line) => {
+    const row = line.split(",");
+    return { action: row[1], file_id: row[2], file_name: row[3] };
+  });
+
+  const nodeMap = new Map<string, ActivityNode>();
+  events.forEach((ev) => {
+    if (!ev.action) return;
+    const isOperator = ["edit", "create", "upload", "modify", "shared"].some(
+      (a) => ev.action.includes(a)
+    );
+    const existing = nodeMap.get(ev.file_id);
+    nodeMap.set(ev.file_id, {
+      id: ev.file_id,
+      name: ev.file_name,
+      type: existing?.type === "Operator" || isOperator ? "Operator" : "Observer",
+    });
+  });
+
+  const nodes = Array.from(nodeMap.values());
+  const opCount = nodes.filter((n) => n.type === "Operator").length;
+  const obsCount = nodes.filter((n) => n.type === "Observer").length;
+
+  const totalActions = observations + operations;
+  const couplingStrength =
+    totalActions === 0 ? 0 : Math.round((operations / totalActions) * 100);
+
+  let systemStatus = "Integrated";
+  if (couplingStrength < 20) systemStatus = "Disconnected (Type 3)";
+  else if (couplingStrength < 40) systemStatus = "Critical Slowing Down";
+
+  return { nodes, opCount, obsCount, couplingStrength, systemStatus };
+}
+
+export function calculateCouplingStrength(
+  observations: number,
+  operations: number
+): number {
+  const totalActions = observations + operations;
+  if (totalActions === 0) return 0;
+  return Math.round((operations / totalActions) * 100);
+}
+
+export function getSystemStatus(couplingStrength: number): string {
+  if (couplingStrength < 20) return "Disconnected (Type 3)";
+  if (couplingStrength < 40) return "Critical Slowing Down";
+  return "Integrated";
+}
