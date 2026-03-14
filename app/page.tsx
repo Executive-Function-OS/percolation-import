@@ -1,10 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Play, Brain, Eye, Pencil, Sparkles, Activity } from "lucide-react";
+import { Play, Brain, Eye, Pencil, Sparkles, Activity, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import DayCard from "@/components/day-card";
 import SpawningDetector from "@/components/spawning-detector";
+import AboutTab from "@/components/about-tab";
 import {
   buildPercolationNetwork,
   calculatePercolationMetrics,
@@ -24,7 +25,7 @@ export default function PercolationDashboard() {
   const [results, setResults] = useState<DayResult[] | null>(null);
   const [running, setRunning] = useState(false);
   const [expandedDay, setExpandedDay] = useState<string | null>(null);
-  const [activeTab, setActiveTab] = useState<"percolation" | "spawning">(
+  const [activeTab, setActiveTab] = useState<"percolation" | "spawning" | "about">(
     "percolation"
   );
   const [graphWidth, setGraphWidth] = useState(320);
@@ -77,28 +78,39 @@ export default function PercolationDashboard() {
         </header>
 
         {/* Tab Navigation */}
-        <div className="flex gap-2 mb-6 p-1 bg-card rounded-xl border border-border">
+        <div className="flex gap-1 mb-6 p-1 bg-card rounded-xl border border-border">
           <button
             onClick={() => setActiveTab("percolation")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all ${
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === "percolation"
                 ? "bg-primary text-primary-foreground"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Activity className="w-4 h-4" />
+            <Activity className="w-3.5 h-3.5" />
             Percolation
           </button>
           <button
             onClick={() => setActiveTab("spawning")}
-            className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-sm font-medium transition-all ${
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-xs font-medium transition-all ${
               activeTab === "spawning"
                 ? "bg-accent text-accent-foreground"
                 : "text-muted-foreground hover:text-foreground"
             }`}
           >
-            <Brain className="w-4 h-4" />
+            <Brain className="w-3.5 h-3.5" />
             Spawning
+          </button>
+          <button
+            onClick={() => setActiveTab("about")}
+            className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg text-xs font-medium transition-all ${
+              activeTab === "about"
+                ? "bg-[var(--success)] text-[var(--success-foreground)]"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            <Info className="w-3.5 h-3.5" />
+            About
           </button>
         </div>
 
@@ -195,8 +207,10 @@ export default function PercolationDashboard() {
               </div>
             )}
           </>
-        ) : (
+        ) : activeTab === "spawning" ? (
           <SpawningDetector />
+        ) : (
+          <AboutTab />
         )}
       </div>
     </main>
