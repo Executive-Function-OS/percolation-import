@@ -17,7 +17,7 @@ export default function PercolationPage() {
     
     try {
       // This calls the Python logic in /api/analyze.py
-      const response = await fetch('/api/analyze', {
+      const response = await fetch('/api', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text: dataInput }),
