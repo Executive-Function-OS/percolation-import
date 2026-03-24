@@ -1,5 +1,9 @@
 # DATA SHARING PROTOCOL
 
+## Client-only build (this repository)
+
+The default web app does **not** upload Drive metadata to a project server; users may export CSV/JSON/PDF/GraphML locally. Any future opt-in telemetry must be documented in consent text and limited to **aggregated, de-identified** metrics (no file names, titles, or contents).
+
 ## Anonymization Protocols
 - All personally identifiable information (PII) will be removed from the dataset before sharing.
 - Data will be aggregated to prevent the identification of individuals.
