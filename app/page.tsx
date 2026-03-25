@@ -1,5 +1,10 @@
 "use client";
 
+import AIEngine from './components/AIEngine'; // Adjust path as needed
+
+// Inside your main render function:
+<AIEngine />
+
 import { useState } from "react";
 import Link from "next/link";
 import {
