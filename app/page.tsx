@@ -1,6 +1,6 @@
 "use client";
 
-import AIEngine from './components/AIEngine'; // Adjust path as needed
+import AIEngine from '@/components/AIEngine'; // Adjust path as needed
 
 // Inside your main render function:
 <AIEngine />
