@@ -1,14 +1,17 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Providers } from './providers'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Percolation Engine: BMS 4.0',
-  description: 'Map cognitive stress to biological network phase transitions',
+  title: 'Executive Function OS — BMS 4.0 Percolation Engine',
+  description:
+    'Research platform: percolation-theoretic analysis of digital interaction graphs with DBSCAN behavioral modes (client-side).',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -37,8 +40,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <body className="font-sans antialiased bg-background text-foreground">
-        {children}
+        <Providers>{children}</Providers>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
