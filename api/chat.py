@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler
 import json
 import os
 import urllib.request
+import urllib.error
 
 class handler(BaseHTTPRequestHandler):
     def do_POST(self):
@@ -20,6 +21,11 @@ class handler(BaseHTTPRequestHandler):
                 "role": role,
                 "parts": [{"text": msg.get("content", "")}]
             })
+            
+        # FIX: Gemini API crashes if the history starts with a "model" message.
+        # We simply remove the initial greeting from the history before sending it to Google.
+        if len(formatted_messages) > 0 and formatted_messages[0]["role"] == "model":
+            formatted_messages.pop(0)
         
         # 3. Get the secure API key from environment variables (from Vercel)
         api_key = os.environ.get('GEMINI_API_KEY')
@@ -62,8 +68,17 @@ class handler(BaseHTTPRequestHandler):
                 self.end_headers()
                 self.wfile.write(json.dumps({"text": ai_text}).encode('utf-8'))
                 
+        except urllib.error.HTTPError as e:
+            # FIX: If Google rejects the request, read the EXACT error message and send it back
+            error_body = e.read().decode('utf-8')
+            self.send_response(500)
+            self.send_header('Content-type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": f"Google API Error: {error_body}"}).encode('utf-8'))
+            print("Google API Error:", error_body)
+            
         except Exception as e:
-            # Send an error gracefully if something goes wrong
+            # Send a generic error gracefully if something else goes wrong
             self.send_response(500)
             self.send_header('Content-type', 'application/json')
             self.end_headers()

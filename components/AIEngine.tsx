@@ -1,4 +1,4 @@
-"use client"; // Mandatory for Next.js App Router interactivity
+"use client"; 
 
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -15,7 +15,6 @@ export default function AIEngine() {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll to the bottom when new messages arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -30,24 +29,34 @@ export default function AIEngine() {
     setIsLoading(true);
 
     try {
-      // Call the secure Python backend we created (/api/chat.py)
-      const response = await fetch('/api/chat', {
+      // 1. Point to the NEW api route to bypass the old python file
+      const response = await fetch('/api/engine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: newMessages }),
       });
 
-      if (!response.ok) throw new Error('Failed to fetch from API');
-
-      const data = await response.json();
+      // 2. Read the raw text FIRST to prevent JSON crash errors
+      const rawText = await response.text();
+      let data;
       
-      // Look for the clean "text" field we sent back from the Python file
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseError) {
+        // If it's not JSON, it's probably an HTML error page from Vercel
+        throw new Error(`Server returned weird data instead of JSON: ${rawText.substring(0, 100)}...`);
+      }
+      
+      if (!response.ok) {
+        throw new Error(data.error || `HTTP Error ${response.status}`);
+      }
+      
       const aiResponseText = data.text || "No response generated.";
-      
       setMessages([...newMessages, { role: 'model', content: aiResponseText }]);
-    } catch (error) {
+      
+    } catch (error: any) {
       console.error("Chat Error:", error);
-      setMessages([...newMessages, { role: 'model', content: "Connection error. Please try again." }]);
+      setMessages([...newMessages, { role: 'model', content: `🚨 Error: ${error.message}` }]);
     } finally {
       setIsLoading(false);
     }
@@ -55,13 +64,11 @@ export default function AIEngine() {
 
   return (
     <div className="flex flex-col h-[500px] w-full max-w-2xl mx-auto border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm font-sans">
-      {/* Header */}
       <div className="bg-slate-900 text-white p-4 flex items-center space-x-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-400"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
         <h2 className="text-lg font-semibold tracking-tight">Executive Function OS</h2>
       </div>
 
-      {/* Chat Area */}
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -96,7 +103,6 @@ export default function AIEngine() {
         <div ref={messagesEndRef} />
       </div>
 
-      {/* Input Area */}
       <div className="p-4 bg-white border-t border-gray-200">
         <form onSubmit={handleSend} className="flex space-x-2">
           <input
@@ -119,4 +125,5 @@ export default function AIEngine() {
     </div>
   );
 }
+
 
