@@ -1,10 +1,5 @@
 "use client";
 
-import AIEngine from '@/components/AIEngine'; // Adjust path as needed
-
-// Inside your main render function:
-<AIEngine />
-
 import { useState } from "react";
 import Link from "next/link";
 import {
@@ -26,6 +21,9 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+
+// Here is the correct way to import the component
+import AIEngine from '@/components/AIEngine'; 
 
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -218,6 +216,23 @@ export default function Home() {
         </div>
       </section>
 
+      {/* --- AI ENGINE SECTION START --- */}
+      <section className="bg-slate-50 border-y border-border px-5 py-20">
+        <div className="mx-auto max-w-5xl">
+          <h2 className="mb-4 text-center text-2xl font-bold text-[#1E40AF] md:text-3xl">
+            Consult the Engine
+          </h2>
+          <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-muted-foreground">
+            Interact directly with the Executive Function OS logic core to structure your working memory.
+          </p>
+          
+          {/* This is where the Chatbot actually gets drawn on the screen! */}
+          <AIEngine />
+          
+        </div>
+      </section>
+      {/* --- AI ENGINE SECTION END --- */}
+
       <section className="bg-[#0F172A] px-5 py-16 text-white">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 flex items-center justify-center gap-2 text-xl font-bold md:text-2xl">
@@ -261,3 +276,4 @@ export default function Home() {
     </div>
   );
 }
+
