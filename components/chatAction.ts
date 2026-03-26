@@ -1,20 +1,20 @@
-"use server"; // This magic line tells Next.js to NEVER send this file to the browser. It hides your API key!
+"use server";
 
-export async function getChatResponse(messages: any[]) {
+export async function getChatResponse(messagesJsonString: string) {
   try {
     const apiKey = process.env.GEMINI_API_KEY;
     
     if (!apiKey) {
-      throw new Error("Missing GEMINI_API_KEY in Vercel settings.");
+      throw new Error("API Key is missing from Vercel environment variables.");
     }
 
-    // Format messages for Gemini
+    const messages = JSON.parse(messagesJsonString);
+
     const formattedMessages = messages.map((msg: any) => ({
       role: msg.role === 'model' ? 'model' : 'user',
       parts: [{ text: msg.content || '' }]
     }));
 
-    // Remove the initial AI greeting
     if (formattedMessages.length > 0 && formattedMessages[0].role === 'model') {
       formattedMessages.shift();
     }
@@ -26,28 +26,28 @@ export async function getChatResponse(messages: any[]) {
       systemInstruction: { parts: [{ text: systemInstruction }] }
     };
 
-    // Call Gemini 2.0 Flash
     const response = await fetch(
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        cache: 'no-store'
       }
     );
 
     const data = await response.json();
 
     if (!response.ok) {
-       console.error("Gemini API Error:", data);
        throw new Error(data.error?.message || "Google API Error");
     }
 
     return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
 
   } catch (error: any) {
-    console.error("Server Action Error:", error);
-    throw new Error(error.message || "Failed to reach AI engine");
+    console.error("Server Action Error:", error.message); 
+    throw new Error(error.message);
   }
 }
+
 
