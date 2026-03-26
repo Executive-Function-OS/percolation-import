@@ -1,7 +1,7 @@
 "use client"; 
 
 import React, { useState, useRef, useEffect } from 'react';
-import { getChatResponse } from './chatAction'; // Import our new Server Action!
+import { getChatResponse } from './chatAction';
 
 type Message = {
   role: 'user' | 'model';
@@ -30,10 +30,10 @@ export default function AIEngine() {
     setIsLoading(true);
 
     try {
-      // 1. Call the Server Action directly (Next.js handles all the background routing automatically!)
-      const aiResponseText = await getChatResponse(newMessages);
+      // Stringify the data to safely pass it over the Client/Server boundary
+      const messagesString = JSON.stringify(newMessages);
+      const aiResponseText = await getChatResponse(messagesString);
       
-      // 2. Add the response to the chat
       setMessages([...newMessages, { role: 'model', content: aiResponseText }]);
       
     } catch (error: any) {
