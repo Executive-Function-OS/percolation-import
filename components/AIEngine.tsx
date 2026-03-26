@@ -29,15 +29,24 @@ export default function AIEngine() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/chat', {
+      // 1. Point to the NEW api route to bypass the old python file
+      const response = await fetch('/api/engine', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: newMessages }),
       });
 
-      const data = await response.json();
+      // 2. Read the raw text FIRST to prevent JSON crash errors
+      const rawText = await response.text();
+      let data;
       
-      // If the response is not OK, intentionally throw the exact error message we got from the backend
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseError) {
+        // If it's not JSON, it's probably an HTML error page from Vercel
+        throw new Error(`Server returned weird data instead of JSON: ${rawText.substring(0, 100)}...`);
+      }
+      
       if (!response.ok) {
         throw new Error(data.error || `HTTP Error ${response.status}`);
       }
@@ -47,7 +56,6 @@ export default function AIEngine() {
       
     } catch (error: any) {
       console.error("Chat Error:", error);
-      // Print the EXACT error into the chat window
       setMessages([...newMessages, { role: 'model', content: `🚨 Error: ${error.message}` }]);
     } finally {
       setIsLoading(false);
