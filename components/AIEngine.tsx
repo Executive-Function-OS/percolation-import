@@ -1,6 +1,7 @@
 "use client"; 
 
 import React, { useState, useRef, useEffect } from 'react';
+import { getChatResponse } from './chatAction'; // Import our new Server Action!
 
 type Message = {
   role: 'user' | 'model';
@@ -29,29 +30,10 @@ export default function AIEngine() {
     setIsLoading(true);
 
     try {
-      // 1. Point to the NEW api route to bypass the old python file
-      const response = await fetch('/api/engine', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: newMessages }),
-      });
-
-      // 2. Read the raw text FIRST to prevent JSON crash errors
-      const rawText = await response.text();
-      let data;
+      // 1. Call the Server Action directly (Next.js handles all the background routing automatically!)
+      const aiResponseText = await getChatResponse(newMessages);
       
-      try {
-        data = JSON.parse(rawText);
-      } catch (parseError) {
-        // If it's not JSON, it's probably an HTML error page from Vercel
-        throw new Error(`Server returned weird data instead of JSON: ${rawText.substring(0, 100)}...`);
-      }
-      
-      if (!response.ok) {
-        throw new Error(data.error || `HTTP Error ${response.status}`);
-      }
-      
-      const aiResponseText = data.text || "No response generated.";
+      // 2. Add the response to the chat
       setMessages([...newMessages, { role: 'model', content: aiResponseText }]);
       
     } catch (error: any) {
