@@ -31,7 +31,7 @@ export default function AIEngine() {
 
     try {
       // Call the secure Python backend we created (/api/chat.py)
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/api/chat.py', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ messages: newMessages }),
