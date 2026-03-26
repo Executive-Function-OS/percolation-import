@@ -1,4 +1,15 @@
-# percolation-import
+# Executive Function OS — BMS 4.0 Percolation Engine
+
+Next.js research app: **client-side** Google Drive Activity analysis (OAuth), DBSCAN behavioral modes, percolation simulations on window graphs, and exports (PDF, GraphML, CSV, JSON). See `/engine` after `npm run dev`.
+
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_GOOGLE_CLIENT_ID` for OAuth.
+
+- `npm run test` — Vitest unit tests for core classifiers  
+- `npm run build` — production build  
+
+---
+
+## percolation-import (upstream)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [v0](https://v0.app).
 
