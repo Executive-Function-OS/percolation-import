@@ -5,11 +5,10 @@ export async function getChatResponse(messagesJsonString: string) {
     const apiKey = process.env.GEMINI_API_KEY;
     
     if (!apiKey) {
-      throw new Error("API Key is missing from Vercel environment variables.");
+      return { error: "Configuration Error: GEMINI_API_KEY is missing in Vercel." };
     }
 
     const messages = JSON.parse(messagesJsonString);
-
     const formattedMessages = messages.map((msg: any) => ({
       role: msg.role === 'model' ? 'model' : 'user',
       parts: [{ text: msg.content || '' }]
@@ -19,11 +18,11 @@ export async function getChatResponse(messagesJsonString: string) {
       formattedMessages.shift();
     }
 
-    const systemInstruction = "You are the core logic engine for Executive Function OS. Your communication style is crisp, analytical, and highly structured, like a well-designed computer terminal but friendly. When users give you a brain-dump of tasks, your job is to act as their external 'Working Memory'. Categorize their thoughts into: 1. Immediate Actions, 2. Delegated Tasks, and 3. Backlog. Use bolding for key terms and keep your language highly efficient.";
-
     const payload = {
       contents: formattedMessages,
-      systemInstruction: { parts: [{ text: systemInstruction }] }
+      systemInstruction: { 
+        parts: [{ text: "You are the core logic engine for Executive Function OS. Your communication style is crisp, analytical, and highly structured, like a well-designed computer terminal but friendly. Categorize thoughts into: 1. Immediate Actions, 2. Delegated Tasks, and 3. Backlog." }] 
+      }
     };
 
     const response = await fetch(
@@ -39,15 +38,13 @@ export async function getChatResponse(messagesJsonString: string) {
     const data = await response.json();
 
     if (!response.ok) {
-       throw new Error(data.error?.message || "Google API Error");
+       return { error: `Google API Error: ${data.error?.message || "Unknown error"}` };
     }
 
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+    const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
+    return { text: aiText };
 
   } catch (error: any) {
-    console.error("Server Action Error:", error.message); 
-    throw new Error(error.message);
+    return { error: `Server Action Failed: ${error.message}` };
   }
 }
-
-
