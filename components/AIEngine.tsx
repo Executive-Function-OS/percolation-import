@@ -1,7 +1,8 @@
 "use client"; 
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, User, Bot, Loader2 } from 'lucide-react'; 
+import { getChatResponse } from './chatAction';
+import { Send, User, Bot, Loader2 } from 'lucide-react';
 
 type Message = {
   role: 'user' | 'model';
@@ -30,55 +31,29 @@ export default function AIEngine() {
     setIsLoading(true);
 
     try {
-      const apiKey = "";
+      const messagesString = JSON.stringify(newMessages);
       
-      const formattedMessages = newMessages.map((msg) => ({
-        role: msg.role === 'model' ? 'model' : 'user',
-        parts: [{ text: msg.content || '' }]
-      }));
-
-      // Remove the initial AI greeting to satisfy the API
-      if (formattedMessages.length > 0 && formattedMessages[0].role === 'model') {
-        formattedMessages.shift();
+      // Call the secure Server Action (this is what reads your Vercel variable!)
+      const response = await getChatResponse(messagesString);
+      
+      if (response.error) {
+        setMessages([...newMessages, { role: 'model', content: `🚨 ${response.error}` }]);
+      } else if (response.text) {
+        setMessages([...newMessages, { role: 'model', content: response.text }]);
       }
-
-      const systemInstruction = "You are the core logic engine for Executive Function OS. Your communication style is crisp, analytical, and highly structured, like a well-designed computer terminal but friendly. Categorize thoughts into: 1. Immediate Actions, 2. Delegated Tasks, and 3. Backlog.";
-
-      const payload = {
-        contents: formattedMessages,
-        systemInstruction: { parts: [{ text: systemInstruction }] }
-      };
-
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error?.message || "Google API Error");
-      }
-
-      const aiResponseText = data.candidates?.[0]?.content?.parts?.[0]?.text || "No response generated.";
-      setMessages([...newMessages, { role: 'model', content: aiResponseText }]);
       
     } catch (error: any) {
-      setMessages([...newMessages, { role: 'model', content: `🚨 Error: ${error.message}` }]);
+      setMessages([...newMessages, { role: 'model', content: `🚨 Connection Error: ${error.message}` }]);
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="flex flex-col h-[600px] w-full max-w-2xl mx-auto border border-slate-200 rounded-xl overflow-hidden bg-white shadow-lg font-sans">
+    <div className="flex flex-col h-[600px] w-full max-w-2xl mx-auto border border-slate-200 rounded-xl overflow-hidden bg-white shadow-lg font-sans my-10">
       <div className="bg-[#0F172A] text-white p-4 flex items-center space-x-2">
         <Bot size={24} className="text-[#0D9488]" />
-        <h2 className="text-lg font-semibold tracking-tight">Logic Core Interface</h2>
+        <h2 className="text-lg font-semibold tracking-tight">Executive Function OS: Logic Core</h2>
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50">
@@ -96,6 +71,7 @@ export default function AIEngine() {
             </div>
           </div>
         ))}
+        
         {isLoading && (
           <div className="flex justify-start">
             <div className="flex flex-row max-w-[80%]">
@@ -104,7 +80,7 @@ export default function AIEngine() {
               </div>
               <div className="px-4 py-3 rounded-2xl bg-white border border-slate-200 text-slate-500 text-sm rounded-tl-none shadow-sm flex items-center space-x-2">
                 <Loader2 size={16} className="animate-spin text-slate-400" />
-                <span>Processing input...</span>
+                <span>Processing...</span>
               </div>
             </div>
           </div>
@@ -118,7 +94,7 @@ export default function AIEngine() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Describe the friction point..."
+            placeholder="Input raw data for processing..."
             className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E40AF] text-sm bg-slate-50"
             disabled={isLoading}
           />
@@ -134,3 +110,5 @@ export default function AIEngine() {
     </div>
   );
 }
+
+
