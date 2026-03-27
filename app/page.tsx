@@ -22,8 +22,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-// Here is the correct way to import the component
-import AIEngine from '@/components/AIEngine'; 
+// Correctly imports from the ROOT components folder using the @ alias
+import AIEngine from "@/components/AIEngine";
 
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -65,10 +65,6 @@ export default function Home() {
               Learn about the research
             </Link>
           </div>
-          <p className="mx-auto mt-6 max-w-xl text-xs text-slate-500">
-            🔒 Client-side processing only — your Drive metadata is analyzed in your browser; configure{" "}
-            <code className="rounded bg-white/10 px-1">NEXT_PUBLIC_GOOGLE_CLIENT_ID</code> for OAuth.
-          </p>
         </div>
       </header>
 
@@ -78,14 +74,11 @@ export default function Home() {
             <p>
               This platform implements a <strong className="text-foreground">percolation-theoretic</strong>{" "}
               framing for early signals of cognitive network fragmentation in digital trace data.
-              Conceptually parallel to cellular stress responses, we model interactions as a graph where
-              sprawl, switching, and version fragmentation act as stress proxies.
             </p>
             <ul className="list-disc space-y-2 pl-5">
               <li>DBSCAN identifies irregular behavioral mode clusters (vs. k-means).</li>
               <li>Network edges combine temporal adjacency, cluster similarity, and file co-occurrence.</li>
               <li>Percolation simulations estimate proximity to a modeled collapse of the giant component.</li>
-              <li>Ground truth: user-annotated crisis dates for exploratory validation (prospective studies + IRB for claims).</li>
             </ul>
           </CardContent>
         </Card>
@@ -96,117 +89,40 @@ export default function Home() {
           Entry points
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
-          <Link
-            href="/engine"
-            onMouseEnter={() => setHoveredCard("engine")}
-            onMouseLeave={() => setHoveredCard(null)}
-            className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[#1E40AF]/40"
-          >
+          <Link href="/engine" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[#1E40AF]/40">
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1E40AF]/10 transition group-hover:bg-[#1E40AF]">
-              <Network
-                className={`h-7 w-7 ${hoveredCard === "engine" ? "text-white" : "text-[#1E40AF]"}`}
-              />
+              <Network className="h-7 w-7 text-[#1E40AF] group-hover:text-white" />
             </div>
             <h3 className="mb-3 text-lg font-bold">Percolation engine</h3>
-            <p className="text-sm text-muted-foreground">
-              OAuth (Drive Activity), preprocessing, DBSCAN, percolation curves, exports — full research
-              workflow in the browser.
-            </p>
+            <p className="text-sm text-muted-foreground">OAuth (Drive Activity), preprocessing, DBSCAN, percolation curves, exports.</p>
           </Link>
 
-          <Link
-            href="/battle-map"
-            onMouseEnter={() => setHoveredCard("battle-map")}
-            onMouseLeave={() => setHoveredCard(null)}
-            className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--indigo)]/40"
-          >
+          <Link href="/battle-map" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--indigo)]/40">
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--indigo-dim)] transition group-hover:bg-[var(--indigo)]">
-              <Map
-                className={`h-7 w-7 ${hoveredCard === "battle-map" ? "text-white" : "text-[var(--indigo)]"}`}
-              />
+              <Map className="h-7 w-7 text-[var(--indigo)] group-hover:text-white" />
             </div>
             <h3 className="mb-3 text-lg font-bold">Battle map</h3>
-            <p className="text-sm text-muted-foreground">
-              Original navigation framework for corrupted systems — installations, compass, exit
-              protocols.
-            </p>
+            <p className="text-sm text-muted-foreground">Original navigation framework for corrupted systems — installations, compass, exit protocols.</p>
           </Link>
 
-          <Link
-            href="/bms"
-            onMouseEnter={() => setHoveredCard("bms")}
-            onMouseLeave={() => setHoveredCard(null)}
-            className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--emerald)]/40"
-          >
+          <Link href="/bms" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--emerald)]/40">
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--emerald-dim)] transition group-hover:bg-[var(--emerald)]">
-              <Brain
-                className={`h-7 w-7 ${hoveredCard === "bms" ? "text-white" : "text-[var(--emerald)]"}`}
-              />
+              <Brain className="h-7 w-7 text-[var(--emerald)] group-hover:text-white" />
             </div>
-            <h3 className="mb-3 text-lg font-bold">BMS 4.0 protocol (classic)</h3>
-            <p className="text-sm text-muted-foreground">
-              Earlier paste-based coupling view with biological lineage notes — preserved for continuity.
-            </p>
+            <h3 className="mb-3 text-lg font-bold">BMS 4.0 protocol</h3>
+            <p className="text-sm text-muted-foreground">Earlier paste-based coupling view with biological lineage notes.</p>
           </Link>
-        </div>
-      </section>
-
-      <section className="border-y border-border bg-muted/40 px-5 py-16">
-        <div className="mx-auto max-w-3xl">
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="framework">
-              <AccordionTrigger className="text-left font-semibold text-[#1E40AF]">
-                Theoretical framework (expandable)
-              </AccordionTrigger>
-              <AccordionContent className="space-y-3 text-sm text-muted-foreground">
-                <p>
-                  <strong className="text-foreground">Network biology parallel:</strong> metabolic stress
-                  can reorganize cellular interaction networks; here we use analogous{" "}
-                  <em>heuristics</em> on digital traces — not a claim of biological identity.
-                </p>
-                <p>
-                  <strong className="text-foreground">Substrate vs. observable:</strong> Tier 1 patterns
-                  (surface behaviors) vs Tier 2 installations (meaning preservation, sunk cost) — aligned
-                  with Rarebrain-style framing for high-functioning neurodivergent cognition.
-                </p>
-                <p>
-                  <strong className="text-foreground">Observer–operator split:</strong> the critical
-                  transition where meta-awareness of the workload pattern degrades relative to continued
-                  operator engagement — quantified approximately via lag metrics in the engine.
-                </p>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
         </div>
       </section>
 
       <section className="mx-auto max-w-5xl px-5 py-20">
         <h2 className="mb-4 text-center text-2xl font-bold md:text-3xl">Four system types</h2>
-        <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-muted-foreground">
-          Academic framing for the classifier used in the engine (research heuristics, not diagnosis).
-        </p>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 md:grid-cols-2 mt-10">
           {[
-            {
-              title: "Type 1 — Solvable",
-              body: "Low fragmentation; effort–outcome relationship remains tractable.",
-              tone: "border-emerald-200 bg-emerald-50/50",
-            },
-            {
-              title: "Type 2 — Complex but navigable",
-              body: "Moderate connectivity; probabilistic but still steerable with strategy.",
-              tone: "border-blue-200 bg-blue-50/50",
-            },
-            {
-              title: "Type 3 — Fundamentally corrupted",
-              body: "High fragmentation and coupling — inverse returns; key research interest (Nathan’s curiosity point).",
-              tone: "border-amber-300 bg-amber-50/80",
-            },
-            {
-              title: "Type 4 — Paradox system",
-              body: "Extreme fragmentation or lock-in — both pathological extremes in this model.",
-              tone: "border-red-300 bg-red-50/80",
-            },
+            { title: "Type 1 — Solvable", body: "Low fragmentation; effort–outcome relationship remains tractable.", tone: "border-emerald-200 bg-emerald-50/50" },
+            { title: "Type 2 — Complex but navigable", body: "Moderate connectivity; probabilistic but still steerable with strategy.", tone: "border-blue-200 bg-blue-50/50" },
+            { title: "Type 3 — Fundamentally corrupted", body: "High fragmentation and coupling — inverse returns.", tone: "border-amber-300 bg-amber-50/80" },
+            { title: "Type 4 — Paradox system", body: "Extreme fragmentation or lock-in — both pathological extremes in this model.", tone: "border-red-300 bg-red-50/80" },
           ].map((t) => (
             <div key={t.title} className={`rounded-2xl border p-6 ${t.tone}`}>
               <h4 className="mb-2 font-bold">{t.title}</h4>
@@ -216,7 +132,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- AI ENGINE SECTION START --- */}
+      {/* --- AI ENGINE SECTION --- */}
       <section className="bg-slate-50 border-y border-border px-5 py-20">
         <div className="mx-auto max-w-5xl">
           <h2 className="mb-4 text-center text-2xl font-bold text-[#1E40AF] md:text-3xl">
@@ -226,12 +142,10 @@ export default function Home() {
             Interact directly with the Executive Function OS logic core to structure your working memory.
           </p>
           
-          {/* This is where the Chatbot actually gets drawn on the screen! */}
           <AIEngine />
           
         </div>
       </section>
-      {/* --- AI ENGINE SECTION END --- */}
 
       <section className="bg-[#0F172A] px-5 py-16 text-white">
         <div className="mx-auto max-w-3xl text-center">
@@ -239,12 +153,7 @@ export default function Home() {
             <Layers className="h-6 w-6 text-[#0D9488]" />
             Collaborators & participation
           </h2>
-          <ul className="mb-8 space-y-2 text-left text-sm text-slate-400">
-            <li>• Computational biology — network topology & phase-transition metaphors</li>
-            <li>• Cognitive networks — N=1 methodology and dense longitudinal designs</li>
-            <li>• Rarebrain Institute — observable vs substrate framing for neurodivergent cognition</li>
-          </ul>
-          <Button asChild size="lg" className="bg-[#1E40AF] hover:bg-[#1E3A8A]">
+          <Button asChild size="lg" className="bg-[#1E40AF] hover:bg-[#1E3A8A] mt-4">
             <Link href="/engine">
               <Shield className="mr-2 h-4 w-4" />
               Join the research (open engine)
@@ -259,21 +168,10 @@ export default function Home() {
             <Compass className="h-6 w-6 text-[#1E40AF]" />
             <span className="font-semibold text-foreground">Executive Function OS</span>
           </div>
-          <div>
-            <p>BMS 4.0 Percolation Engine — Annika Eriksson</p>
-            <p className="mt-1">
-              <Link href="/engine/methodology" className="underline">
-                Methodology
-              </Link>
-              {" · "}
-              <Link href="/percolation" className="underline">
-                Legacy demo
-              </Link>
-            </p>
-          </div>
         </div>
       </footer>
     </div>
   );
 }
+
 
