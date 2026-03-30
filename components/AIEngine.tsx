@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { getChatResponse } from './chatAction';
-import { Send, User, Bot, Loader2 } from 'lucide-react';
+import { Send, User, Bot, Loader2, Copy, Check } from 'lucide-react';
 
 type Message = {
   role: 'user' | 'model';
@@ -15,6 +15,7 @@ export default function AIEngine() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,8 +33,6 @@ export default function AIEngine() {
 
     try {
       const messagesString = JSON.stringify(newMessages);
-      
-      // Call the secure Server Action (this is what reads your Vercel variable!)
       const response = await getChatResponse(messagesString);
       
       if (response.error) {
@@ -49,6 +48,22 @@ export default function AIEngine() {
     }
   };
 
+  // Robust copy function that works across all browsers and devices
+  const handleCopy = (text: string, index: number) => {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      setCopiedIndex(index);
+      setTimeout(() => setCopiedIndex(null), 2000); // Reset checkmark after 2 seconds
+    } catch (err) {
+      console.error('Failed to copy', err);
+    }
+    document.body.removeChild(textArea);
+  };
+
   return (
     <div className="flex flex-col h-[600px] w-full max-w-2xl mx-auto border border-slate-200 rounded-xl overflow-hidden bg-white shadow-lg font-sans my-10">
       <div className="bg-[#0F172A] text-white p-4 flex items-center space-x-2">
@@ -60,14 +75,36 @@ export default function AIEngine() {
         {messages.map((msg, index) => (
           <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
             <div className={`flex max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+              
+              {/* Avatar */}
               <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center ${msg.role === 'user' ? 'bg-[#1E40AF] ml-3' : 'bg-slate-700 mr-3'}`}>
                 {msg.role === 'user' ? <User size={16} className="text-white" /> : <Bot size={16} className="text-white" />}
               </div>
-              <div className={`px-4 py-3 text-sm rounded-2xl ${msg.role === 'user' ? 'bg-[#1E40AF] text-white rounded-tr-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm'}`}>
-                {msg.content.split('\n').map((line, i) => (
-                  <span key={i}>{line}<br/></span>
-                ))}
+
+              {/* Message Content & Copy Button */}
+              <div className="flex flex-col gap-1">
+                {/* select-text forces the browser to allow highlighting! */}
+                <div className={`px-4 py-3 text-sm rounded-2xl select-text cursor-text ${msg.role === 'user' ? 'bg-[#1E40AF] text-white rounded-tr-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm'}`}>
+                  {msg.content.split('\n').map((line, i) => (
+                    <span key={i}>{line}<br/></span>
+                  ))}
+                </div>
+                
+                {/* One-click copy button for AI responses */}
+                {msg.role === 'model' && (
+                  <button 
+                    onClick={() => handleCopy(msg.content, index)}
+                    className="self-start flex items-center gap-1.5 text-xs text-slate-400 hover:text-slate-700 transition-colors px-1"
+                  >
+                    {copiedIndex === index ? (
+                      <><Check size={14} className="text-emerald-500" /> <span className="text-emerald-500">Copied</span></>
+                    ) : (
+                      <><Copy size={14} /> Copy to clipboard</>
+                    )}
+                  </button>
+                )}
               </div>
+
             </div>
           </div>
         ))}
