@@ -30,19 +30,19 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-[var(--indigo-dim)]">
-      <header className="relative overflow-hidden bg-[#0F172A] px-5 pb-28 pt-20 text-white">
+      <header className="relative overflow-hidden bg-brand-dark px-5 pb-28 pt-20 text-white">
         <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_30%_20%,#1E40AF_0%,transparent_50%)]" />
         <div className="relative z-10 mx-auto max-w-4xl text-center">
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
-            <Microscope className="h-4 w-4 text-[#0D9488]" />
+            <Microscope className="h-4 w-4 text-brand-teal" />
             <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-300">
               Executive Function OS · Research preview 0.9.0-beta
             </span>
           </div>
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-balance md:text-6xl">
-            BMS 4.0 Percolation Engine
+            Executive Function OS
           </h1>
-          <p className="text-lg text-[#0D9488] md:text-xl">Network topology analysis for cognitive resilience research</p>
+          <p className="text-lg text-brand-teal md:text-xl font-medium">A tool to help you break free from overwhelming systems and regain clarity.</p>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-base">
             Detecting observer–operator dynamics through percolation on digital interaction graphs and
             DBSCAN clustering — a collaborative platform for N=1 validation, neurodivergent pattern
@@ -50,19 +50,19 @@ export default function Home() {
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
-              href="/engine"
-              className="inline-flex items-center gap-2 rounded-full bg-[#1E40AF] px-8 py-4 text-sm font-semibold text-white shadow-xl transition hover:bg-[#1E3A8A] active:scale-[0.98]"
+              href="/simulator"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-sm font-semibold text-white shadow-xl transition hover:bg-brand-blue-hover active:scale-[0.98]"
             >
               <Network className="h-5 w-5" />
-              Analyze my network
+              Try the Phase Predictor
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
-              href="/engine/methodology"
+              href="/engine"
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-sm font-semibold backdrop-blur-sm transition hover:bg-white/15"
             >
               <FlaskConical className="h-5 w-5" />
-              Learn about the research
+              Raw Analysis Engine
             </Link>
           </div>
         </div>
@@ -85,16 +85,24 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-5xl px-5 py-20">
-        <h2 className="mb-8 text-center text-2xl font-bold text-[#1E40AF] md:text-3xl">
-          Entry points
+        <h2 className="mb-8 text-center text-2xl font-bold text-brand-blue md:text-3xl">
+          Core Tools
         </h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          <Link href="/engine" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[#1E40AF]/40">
-            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#1E40AF]/10 transition group-hover:bg-[#1E40AF]">
-              <Network className="h-7 w-7 text-[#1E40AF] group-hover:text-white" />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <Link href="/simulator" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-brand-blue/40">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-blue/10 transition group-hover:bg-brand-blue">
+              <Network className="h-7 w-7 text-brand-blue group-hover:text-white" />
             </div>
-            <h3 className="mb-3 text-lg font-bold">Percolation engine</h3>
-            <p className="text-sm text-muted-foreground">OAuth (Drive Activity), preprocessing, DBSCAN, percolation curves, exports.</p>
+            <h3 className="mb-3 text-lg font-bold">Phase Simulator</h3>
+            <p className="text-sm text-muted-foreground">Interactive visualization of cognitive breakdown.</p>
+          </Link>
+
+          <Link href="/engine" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-brand-teal/40">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--emerald-dim)] transition group-hover:bg-[var(--emerald)]">
+              <FlaskConical className="h-7 w-7 text-[var(--emerald)] group-hover:text-white" />
+            </div>
+            <h3 className="mb-3 text-lg font-bold">Analysis Engine</h3>
+            <p className="text-sm text-muted-foreground">OAuth data ingestion and percolation exports.</p>
           </Link>
 
           <Link href="/battle-map" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--indigo)]/40">
@@ -102,15 +110,15 @@ export default function Home() {
               <Map className="h-7 w-7 text-[var(--indigo)] group-hover:text-white" />
             </div>
             <h3 className="mb-3 text-lg font-bold">Battle map</h3>
-            <p className="text-sm text-muted-foreground">Original navigation framework for corrupted systems — installations, compass, exit protocols.</p>
+            <p className="text-sm text-muted-foreground">Original navigation framework for corrupted systems.</p>
           </Link>
 
-          <Link href="/bms" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--emerald)]/40">
-            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--emerald-dim)] transition group-hover:bg-[var(--emerald)]">
-              <Brain className="h-7 w-7 text-[var(--emerald)] group-hover:text-white" />
+          <Link href="/bms" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-pink-500/40">
+            <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-50 transition group-hover:bg-pink-500">
+              <Brain className="h-7 w-7 text-pink-500 group-hover:text-white" />
             </div>
-            <h3 className="mb-3 text-lg font-bold">BMS 4.0 protocol</h3>
-            <p className="text-sm text-muted-foreground">Earlier paste-based coupling view with biological lineage notes.</p>
+            <h3 className="mb-3 text-lg font-bold">BMS Protocol</h3>
+            <p className="text-sm text-muted-foreground">Earlier paste-based coupling view with notes.</p>
           </Link>
         </div>
       </section>
@@ -135,7 +143,7 @@ export default function Home() {
       {/* --- AI ENGINE SECTION --- */}
       <section className="bg-slate-50 border-y border-border px-5 py-20">
         <div className="mx-auto max-w-5xl">
-          <h2 className="mb-4 text-center text-2xl font-bold text-[#1E40AF] md:text-3xl">
+          <h2 className="mb-4 text-center text-2xl font-bold text-brand-blue md:text-3xl">
             Consult the Engine
           </h2>
           <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-muted-foreground">
@@ -147,13 +155,13 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#0F172A] px-5 py-16 text-white">
+      <section className="bg-brand-dark px-5 py-16 text-white">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 flex items-center justify-center gap-2 text-xl font-bold md:text-2xl">
-            <Layers className="h-6 w-6 text-[#0D9488]" />
+            <Layers className="h-6 w-6 text-brand-teal" />
             Collaborators & participation
           </h2>
-          <Button asChild size="lg" className="bg-[#1E40AF] hover:bg-[#1E3A8A] mt-4">
+          <Button asChild size="lg" className="bg-brand-blue hover:bg-brand-blue-hover mt-4">
             <Link href="/engine">
               <Shield className="mr-2 h-4 w-4" />
               Join the research (open engine)
@@ -165,7 +173,7 @@ export default function Home() {
       <footer className="border-t border-border px-5 py-12">
         <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center text-sm text-muted-foreground md:flex-row md:text-left">
           <div className="flex items-center gap-3">
-            <Compass className="h-6 w-6 text-[#1E40AF]" />
+            <Compass className="h-6 w-6 text-brand-blue" />
             <span className="font-semibold text-foreground">Executive Function OS</span>
           </div>
         </div>

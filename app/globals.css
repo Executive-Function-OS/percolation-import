@@ -57,6 +57,10 @@
 @theme inline {
   --font-sans: 'Geist', 'Geist Fallback';
   --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --color-brand-dark: #0F172A;
+  --color-brand-blue: #1E40AF;
+  --color-brand-blue-hover: #1E3A8A;
+  --color-brand-teal: #0D9488;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);

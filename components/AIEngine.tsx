@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { getChatResponse } from './chatAction';
 import { Send, User, Bot, Loader2, Copy, Check } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
 
 type Message = {
   role: 'user' | 'model';
@@ -66,8 +67,8 @@ export default function AIEngine() {
 
   return (
     <div className="flex flex-col h-[600px] w-full max-w-2xl mx-auto border border-slate-200 rounded-xl overflow-hidden bg-white shadow-lg font-sans my-10">
-      <div className="bg-[#0F172A] text-white p-4 flex items-center space-x-2">
-        <Bot size={24} className="text-[#0D9488]" />
+      <div className="bg-brand-dark text-white p-4 flex items-center space-x-2">
+        <Bot size={24} className="text-brand-teal" />
         <h2 className="text-lg font-semibold tracking-tight">Executive Function OS: Logic Core</h2>
       </div>
 
@@ -77,17 +78,19 @@ export default function AIEngine() {
             <div className={`flex max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
               
               {/* Avatar */}
-              <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center ${msg.role === 'user' ? 'bg-[#1E40AF] ml-3' : 'bg-slate-700 mr-3'}`}>
+              <div className={`flex-shrink-0 h-8 w-8 rounded-full flex items-center justify-center ${msg.role === 'user' ? 'bg-brand-blue ml-3' : 'bg-slate-700 mr-3'}`}>
                 {msg.role === 'user' ? <User size={16} className="text-white" /> : <Bot size={16} className="text-white" />}
               </div>
 
               {/* Message Content & Copy Button */}
               <div className="flex flex-col gap-1">
                 {/* select-text forces the browser to allow highlighting! */}
-                <div className={`px-4 py-3 text-sm rounded-2xl select-text cursor-text ${msg.role === 'user' ? 'bg-[#1E40AF] text-white rounded-tr-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm'}`}>
-                  {msg.content.split('\n').map((line, i) => (
-                    <span key={i}>{line}<br/></span>
-                  ))}
+                <div className={`px-4 py-3 text-sm rounded-2xl select-text cursor-text ${msg.role === 'user' ? 'bg-brand-blue text-white rounded-tr-none' : 'bg-white border border-slate-200 text-slate-800 rounded-tl-none shadow-sm [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_strong]:font-bold'}`}>
+                  {msg.role === 'user' ? (
+                    msg.content
+                  ) : (
+                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                  )}
                 </div>
                 
                 {/* One-click copy button for AI responses */}
@@ -132,13 +135,13 @@ export default function AIEngine() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Input raw data for processing..."
-            className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1E40AF] text-sm bg-slate-50"
-            disabled={isLoading}
+            className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-blue text-sm bg-slate-50"
+            disabled={false}
           />
           <button
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="px-5 py-2 bg-[#0F172A] text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 disabled:opacity-50 transition-colors flex items-center justify-center"
+            className="px-5 py-2 bg-brand-dark text-white rounded-lg hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 disabled:opacity-50 transition-colors flex items-center justify-center"
           >
             <Send size={18} />
           </button>
