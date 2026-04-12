@@ -44,7 +44,7 @@ export default function Home() {
           </h1>
           <p className="text-lg text-brand-teal md:text-xl font-medium">A computational model of cognitive network breakdown.</p>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-base">
-            This application is a <strong>framework and model</strong> designed to simulate and visualize how cognitive load impacts the ability to translate intention into action. The visualisations provided are representations within this specific theoretical framework, not direct or clinical measurements of brain activity.
+            This application simulates how cognitive load may disrupt the translation from intention into action. The visualizations are representations within a theoretical framework, not clinical measurements of brain activity.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
@@ -52,7 +52,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-sm font-semibold text-white shadow-xl transition hover:bg-brand-blue-hover active:scale-[0.98]"
             >
               <Network className="h-5 w-5" />
-              Try the Phase Predictor
+              Try the Phase Predictor.
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
@@ -60,7 +60,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-sm font-semibold backdrop-blur-sm transition hover:bg-white/15"
             >
               <FlaskConical className="h-5 w-5" />
-              Raw Analysis Engine
+              Open the Analysis Engine.
             </Link>
           </div>
         </div>
@@ -70,27 +70,71 @@ export default function Home() {
         <Card className="border-border shadow-2xl">
           <CardContent className="space-y-6 p-8 text-sm leading-relaxed text-muted-foreground">
             <div>
-              <h3 className="text-lg font-bold text-foreground mb-2">Methods & Assumptions</h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-lg font-bold text-foreground">Methods & Assumptions</h3>
+                <Link href="/architecture" className="text-sm font-semibold text-brand-blue hover:underline inline-flex items-center gap-1">
+                  Technical Architecture <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
               <p className="mb-3">
-                This platform implements a <strong className="text-foreground">percolation-theoretic</strong>{" "}
-                framing to model cognitive network fragmentation.
+                This platform uses a percolation-theoretic framing to model cognitive network fragmentation.
               </p>
-              <ul className="list-disc space-y-2 pl-5">
-                <li><strong>Data Flow:</strong> Behavioral digital trace data is ingested and projected into a multi-dimensional state space.</li>
-                <li><strong>Transformations:</strong> DBSCAN (Density-Based Spatial Clustering of Applications with Noise) identifies irregular behavioral mode clusters based on these traces. Network edges are then constructed by combining temporal adjacency, cluster similarity, and file co-occurrence.</li>
-                <li><strong>Assumptions:</strong> The core assumption is that "Observer" (intent) and "Operator" (execution) states function as a network bridged by executive function nodes. We assume stress degrades these bridges preferentially.</li>
+              <ul className="list-disc space-y-2 pl-5 mb-6">
+                <li><strong>Data flow:</strong> Behavioral digital trace data are projected into a multidimensional state space.</li>
+                <li><strong>Transformations:</strong> DBSCAN identifies irregular behavioral clusters. Network edges are then constructed from temporal adjacency, cluster similarity, and file co-occurrence.</li>
+                <li><strong>Assumptions:</strong> The model treats "Observer" and "Operator" states as networked processes bridged by executive-function nodes. Stress preferentially degrades those bridges.</li>
               </ul>
+              
+              <h4 className="font-semibold text-foreground mb-2">Planned HybridRAG Expansion</h4>
+              <div className="rounded-xl border border-border overflow-hidden bg-slate-50/50 mb-2">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-slate-100/50 border-b border-border text-foreground">
+                      <tr>
+                        <th className="px-4 py-2 font-semibold">Output</th>
+                        <th className="px-4 py-2 font-semibold">Data Source</th>
+                        <th className="px-4 py-2 font-semibold">Purpose</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border text-muted-foreground">
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Conversation State</td>
+                        <td className="px-4 py-2">Knowledge Graph + Timeline</td>
+                        <td className="px-4 py-2">Dynamic network of actors, obligations, status</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Executive Function Gaps</td>
+                        <td className="px-4 py-2">LLM Pattern Detection</td>
+                        <td className="px-4 py-2">Identify decision friction, deferral patterns</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Procedural Bottlenecks</td>
+                        <td className="px-4 py-2">Graph Analysis</td>
+                        <td className="px-4 py-2">Circular dependencies, unresolved paths</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Observer vs Operator</td>
+                        <td className="px-4 py-2">Text Classification</td>
+                        <td className="px-4 py-2">Ground truth vs belief divergence</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
 
             <div className="border-t border-border pt-6">
               <h3 className="text-lg font-bold text-foreground mb-2">Interpretation & Limitations</h3>
-              <p><strong>How to read the results:</strong> The percolation simulation demonstrates the <em>probability</em> of network collapse under stress. A connected state means the system has pathways to execute intent. A broken state represents localized hyper-focus or task-paralysis.</p>
-              <p className="mt-2 text-amber-600 dark:text-amber-400"><strong>Limitations:</strong> This is a theoretical model. The outputs do not represent clinical diagnoses, nor do they perfectly map to physical neural pathways. Claims regarding broad cognitive capacity or treatment efficacy are not justified based on this framework.</p>
+              <p>The percolation simulation shows how network connectivity changes under stress. A connected state indicates pathways for execution. A broken state indicates reduced coordination, localized fixation, or task paralysis.</p>
+              <p className="mt-2 text-amber-600 dark:text-amber-400"><strong>Limitations:</strong> This is a theoretical model. It does not represent a clinical diagnosis or a direct map of neural pathways. It should not be used to infer treatment efficacy or broad cognitive capacity.</p>
             </div>
 
             <div className="border-t border-border pt-6">
               <h3 className="text-lg font-bold text-foreground mb-2">Validation & Next Steps</h3>
-              <p>Current feedback mechanisms act as <strong>internal checks</strong> (face validity and logical verification of the model's behavior under assumed parameters). <strong>External validation</strong> and rigorous tuning against empirical N=1 or larger cohort datasets are ongoing. This represents a preliminary step toward building robust, reproducible tools for computational psychiatry.</p>
+              <p className="mb-3">Current checks are internal: face validity, logical consistency, and verification under assumed parameters. External validation against N=1 or larger cohort data is ongoing. The goal is a transparent, reproducible tool for computational psychiatry.</p>
+              <Link href="/architecture" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-teal hover:underline mt-2">
+                Planned Case-File Pipeline <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </CardContent>
         </Card>
@@ -193,7 +237,7 @@ export default function Home() {
           <div className="max-w-md text-left md:text-right">
             <h4 className="font-semibold text-foreground mb-1">Author Background</h4>
             <p className="text-xs leading-relaxed">
-              M.S. Bioinformatics, OHSU 2017<br/>
+              M.S. Bioinformatics, OHSU, 2017.<br/>
               Capstone in reproducibility in imaging genetics.<br/>
               Co-author on a computational model of mouse ovarian development.<br/>
               Aiming to bring rigorous, reproducible methods to cognitive modeling.

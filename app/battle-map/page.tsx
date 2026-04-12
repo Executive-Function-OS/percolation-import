@@ -70,22 +70,36 @@ export default function BattleMapNavigator() {
           <div className="flex items-center gap-3 mb-4">
             <Map className="text-[var(--indigo)] w-6 h-6" />
             <h2 className="text-[var(--indigo)] font-bold text-[10px] uppercase tracking-[0.4em]">
-              Battle Map System v4.0
+              Battle Map System Version 5.0
             </h2>
           </div>
           <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4">
-            Navigation Framework for{" "}
-            <span className="text-[var(--indigo)]">Corrupted Systems</span>
+            The Terrain Before{" "}
+            <span className="text-[var(--indigo)]">the Theory</span>
           </h1>
           <p className="text-slate-400 text-sm leading-relaxed max-w-2xl">
-            Move beyond diagnosis to intentional engagement, collective strategy,
-            and post-exit integration. This is not about fixing broken systems.
-            This is about navigating them.
+            This is the archive of the conceptual system that helped define the territory before it could be modeled computationally. It is an entry point for people who need to recognize the terrain before they can name it.
           </p>
         </div>
       </header>
 
       <div className="max-w-4xl mx-auto px-5 -mt-8 relative z-20">
+        
+        {/* ARCHIVE NOTE / INTRO */}
+        <div className="bg-[var(--slate-950)] text-white rounded-2xl p-6 md:p-8 mb-8 shadow-xl border border-[var(--indigo)]/20 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--indigo)]/10 blur-3xl rounded-full mix-blend-screen pointer-events-none" />
+          <p className="text-slate-300 mb-6 text-sm md:text-base leading-relaxed">
+            <span className="font-bold text-white">Battle Map</span> began as a way to describe, in semantic terms, the internal terrain of strain, fragmentation, and survival. Over time, it became the language layer that made the computational model possible. This page preserves that origin.
+          </p>
+          <div className="p-4 bg-white/5 rounded-xl border border-white/10 mb-6">
+            <p className="text-sm text-slate-300 leading-relaxed">
+              <strong className="text-[var(--emerald)] block mb-1">Core claim:</strong> Sometimes you have to describe the terrain before you can model it. Sometimes the first useful system is the one that helps you recognize your own patterning clearly enough to build something real.
+            </p>
+          </div>
+          <p className="text-xs text-slate-500 leading-relaxed max-w-3xl">
+            <strong>Archive Note:</strong> This archive mode is not the research preview. It is the older, more dramatic interface: a place for metaphor, origin stories, and earlier frameworks that shaped the current model. Earlier Battle Map versions remain here as conceptual source material, not as the main public interface. Their value is that they helped turn lived experience into modelable structure.
+          </p>
+        </div>
         {/* SECTION NAV */}
         <div className="bg-card rounded-2xl p-2 flex flex-wrap gap-2 mb-8 shadow-xl border border-border">
           {[
