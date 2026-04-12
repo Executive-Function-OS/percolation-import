@@ -152,8 +152,19 @@ export default function SimulatorPage() {
             </div>
         </div>
 
-        <div className="md:col-span-2 bg-white p-2 rounded-xl border shadow-sm aspect-square md:aspect-auto min-h-[500px]">
-            <SimulatorGraph graph={stressedGraph} width={800} height={600} />
+        <div className="md:col-span-2 flex flex-col space-y-4">
+            <div className="bg-white p-5 rounded-xl border shadow-sm">
+                <h3 className="text-lg font-bold text-slate-800">Observer-Operator Network Visualization</h3>
+                <p className="text-sm text-slate-600 mt-2">
+                    <strong className="text-slate-800">Takeaway:</strong> Watch how increasing the 'Percolation Stress' slider probabilistically degrades the executive bridges (center nodes), ultimately isolating intended actions (Observer, left) from actual execution (Operator, right).
+                </p>
+                <div className="mt-3 text-xs text-amber-800 bg-amber-50 p-3 rounded border border-amber-200">
+                    <strong className="text-amber-900 mb-1 block">Caveat:</strong> This spatial layout is synthetic and randomized on generation. The coordinates do not map to physical brain regions, but rather represent a constructed topology for the percolation simulation.
+                </div>
+            </div>
+            <div className="bg-white p-2 rounded-xl border shadow-sm aspect-square md:aspect-auto min-h-[500px] flex-grow">
+                <SimulatorGraph graph={stressedGraph} width={800} height={600} />
+            </div>
         </div>
       </main>
     </div>

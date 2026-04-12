@@ -42,11 +42,9 @@ export default function Home() {
           <h1 className="mb-4 text-4xl font-bold tracking-tight text-balance md:text-6xl">
             Executive Function OS
           </h1>
-          <p className="text-lg text-brand-teal md:text-xl font-medium">A tool to help you break free from overwhelming systems and regain clarity.</p>
+          <p className="text-lg text-brand-teal md:text-xl font-medium">A computational model of cognitive network breakdown.</p>
           <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-base">
-            Detecting observer–operator dynamics through percolation on digital interaction graphs and
-            DBSCAN clustering — a collaborative platform for N=1 validation, neurodivergent pattern
-            recognition, and computational biology analogies to stress in cellular networks.
+            This application is a <strong>framework and model</strong> designed to simulate and visualize how cognitive load impacts the ability to translate intention into action. The visualisations provided are representations within this specific theoretical framework, not direct or clinical measurements of brain activity.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Link
@@ -68,18 +66,32 @@ export default function Home() {
         </div>
       </header>
 
-      <section className="relative z-20 mx-auto max-w-5xl -mt-16 px-5">
+      <section className="relative z-20 mx-auto max-w-5xl -mt-16 px-5 space-y-6">
         <Card className="border-border shadow-2xl">
-          <CardContent className="space-y-4 p-8 text-sm leading-relaxed text-muted-foreground">
-            <p>
-              This platform implements a <strong className="text-foreground">percolation-theoretic</strong>{" "}
-              framing for early signals of cognitive network fragmentation in digital trace data.
-            </p>
-            <ul className="list-disc space-y-2 pl-5">
-              <li>DBSCAN identifies irregular behavioral mode clusters (vs. k-means).</li>
-              <li>Network edges combine temporal adjacency, cluster similarity, and file co-occurrence.</li>
-              <li>Percolation simulations estimate proximity to a modeled collapse of the giant component.</li>
-            </ul>
+          <CardContent className="space-y-6 p-8 text-sm leading-relaxed text-muted-foreground">
+            <div>
+              <h3 className="text-lg font-bold text-foreground mb-2">Methods & Assumptions</h3>
+              <p className="mb-3">
+                This platform implements a <strong className="text-foreground">percolation-theoretic</strong>{" "}
+                framing to model cognitive network fragmentation.
+              </p>
+              <ul className="list-disc space-y-2 pl-5">
+                <li><strong>Data Flow:</strong> Behavioral digital trace data is ingested and projected into a multi-dimensional state space.</li>
+                <li><strong>Transformations:</strong> DBSCAN (Density-Based Spatial Clustering of Applications with Noise) identifies irregular behavioral mode clusters based on these traces. Network edges are then constructed by combining temporal adjacency, cluster similarity, and file co-occurrence.</li>
+                <li><strong>Assumptions:</strong> The core assumption is that "Observer" (intent) and "Operator" (execution) states function as a network bridged by executive function nodes. We assume stress degrades these bridges preferentially.</li>
+              </ul>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="text-lg font-bold text-foreground mb-2">Interpretation & Limitations</h3>
+              <p><strong>How to read the results:</strong> The percolation simulation demonstrates the <em>probability</em> of network collapse under stress. A connected state means the system has pathways to execute intent. A broken state represents localized hyper-focus or task-paralysis.</p>
+              <p className="mt-2 text-amber-600 dark:text-amber-400"><strong>Limitations:</strong> This is a theoretical model. The outputs do not represent clinical diagnoses, nor do they perfectly map to physical neural pathways. Claims regarding broad cognitive capacity or treatment efficacy are not justified based on this framework.</p>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="text-lg font-bold text-foreground mb-2">Validation & Next Steps</h3>
+              <p>Current feedback mechanisms act as <strong>internal checks</strong> (face validity and logical verification of the model's behavior under assumed parameters). <strong>External validation</strong> and rigorous tuning against empirical N=1 or larger cohort datasets are ongoing. This represents a preliminary step toward building robust, reproducible tools for computational psychiatry.</p>
+            </div>
           </CardContent>
         </Card>
       </section>
@@ -171,10 +183,21 @@ export default function Home() {
       </section>
 
       <footer className="border-t border-border px-5 py-12">
-        <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-6 text-center text-sm text-muted-foreground md:flex-row md:text-left">
-          <div className="flex items-center gap-3">
-            <Compass className="h-6 w-6 text-brand-blue" />
-            <span className="font-semibold text-foreground">Executive Function OS</span>
+        <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-6 text-sm text-muted-foreground md:flex-row">
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <Compass className="h-6 w-6 text-brand-blue" />
+              <span className="font-semibold text-foreground">Executive Function OS</span>
+            </div>
+          </div>
+          <div className="max-w-md text-left md:text-right">
+            <h4 className="font-semibold text-foreground mb-1">Author Background</h4>
+            <p className="text-xs leading-relaxed">
+              M.S. Bioinformatics, OHSU 2017<br/>
+              Capstone in reproducibility in imaging genetics.<br/>
+              Co-author on a computational model of mouse ovarian development.<br/>
+              Aiming to bring rigorous, reproducible methods to cognitive modeling.
+            </p>
           </div>
         </div>
       </footer>
