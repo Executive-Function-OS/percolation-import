@@ -11,7 +11,8 @@ import {
   Network, 
   Search, 
   ShieldCheck,
-  Code2
+  Code2,
+  AlertTriangle
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -123,7 +124,7 @@ export default function ArchitecturePage() {
                     <td className="px-6 py-4 font-medium text-foreground">Conversation State</td>
                     <td className="px-6 py-4 text-muted-foreground">Knowledge Graph + Timeline</td>
                     <td className="px-6 py-4 text-muted-foreground">React Force Graph (D3.js), date sliders</td>
-                    <td className="px-6 py-4 text-muted-foreground">Dynamic network of actors, obligations, status</td>
+                    <td className="px-6 py-4 text-muted-foreground">Near real-time after initial indexing; dynamic filters quickly query the cached graph view.</td>
                   </tr>
                   <tr className="hover:bg-slate-50/50 transition-colors">
                     <td className="px-6 py-4 font-medium text-foreground">Executive Function Gaps</td>
@@ -141,7 +142,7 @@ export default function ArchitecturePage() {
                     <td className="px-6 py-4 font-medium text-foreground">Observer vs Operator</td>
                     <td className="px-6 py-4 text-muted-foreground">Text Classification</td>
                     <td className="px-6 py-4 text-muted-foreground">Explicit vs inferred reasoning contrast</td>
-                    <td className="px-6 py-4 text-muted-foreground">Ground truth vs belief divergence</td>
+                    <td className="px-6 py-4 text-muted-foreground">Ground truth vs belief divergence. E.g., Operator infers 'delay due to avoidance'; Observer sees 'no action recorded'. System highlights the gap.</td>
                   </tr>
                 </tbody>
               </table>
@@ -160,7 +161,7 @@ export default function ArchitecturePage() {
             </h3>
             <ul className="space-y-3">
               {[
-                { title: "Scale", desc: "Efficient chunking + graph query optimization for 2400+ pages." },
+                { title: "Scale", desc: "Semantic chunking (by headings or natural breaks) to preserve context, plus graph query optimization for 2400+ pages." },
                 { title: "Accuracy", desc: "LLM verifiers + human-in-loop validation." },
                 { title: "Traceability", desc: "Full provenance from source text to visualization." },
               ].map((item, i) => (
@@ -265,6 +266,36 @@ export default function ArchitecturePage() {
             </div>
           </section>
 
+          {/* KNOWN LIMITATIONS */}
+          <section className="md:col-span-2">
+            <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-rose-500/90">
+              <AlertTriangle className="w-5 h-5 text-rose-500" />
+              Known Limitations
+            </h3>
+            <div className="bg-rose-50/30 rounded-xl p-5 border border-rose-100">
+              <ul className="space-y-4 text-sm">
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
+                  <div>
+                    <span className="text-muted-foreground">LLM entity extraction may miss implicit relationships (e.g., “as discussed” without an explicit link).</span>
+                  </div>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
+                  <div>
+                    <span className="text-muted-foreground">Real-time analysis requires pre-indexing; dynamic filters operate on cached graph.</span>
+                  </div>
+                </li>
+                <li className="flex gap-3">
+                  <div className="w-1.5 h-1.5 rounded-full bg-rose-400 mt-2 shrink-0" />
+                  <div>
+                    <span className="text-muted-foreground">Not a substitute for legal review – intended for pattern discovery and decision support; human review recommended.</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+
         </div>
 
         {/* FOOTER */}
@@ -273,8 +304,8 @@ export default function ArchitecturePage() {
             This architecture enables computational analysis of case-file corpora while preserving transparency and reproducibility.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/simulator" className="px-6 py-2 rounded-full border border-border bg-card hover:bg-slate-50 transition-colors text-sm font-semibold">
-              Live Simulator
+            <Link href="/simulator" className="px-6 py-2 rounded-full border border-brand-teal/50 bg-brand-teal/5 hover:bg-brand-teal/10 transition-colors text-sm font-semibold text-brand-teal">
+              View Live Simulator
             </Link>
             <Link href="/" className="px-6 py-2 rounded-full border border-border bg-card hover:bg-slate-50 transition-colors text-sm font-semibold">
               Methods Overview

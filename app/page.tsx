@@ -24,47 +24,14 @@ import { Card, CardContent } from "@/components/ui/card";
 
 // Correctly imports from the ROOT components folder using the @ alias
 import AIEngine from "@/components/AIEngine";
+import FlightRecorderHero from "@/components/FlightRecorderHero";
 
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-[var(--indigo-dim)]">
-      <header className="relative overflow-hidden bg-brand-dark px-5 pb-28 pt-20 text-white">
-        <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[radial-gradient(circle_at_30%_20%,#1E40AF_0%,transparent_50%)]" />
-        <div className="relative z-10 mx-auto max-w-4xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-sm">
-            <Microscope className="h-4 w-4 text-brand-teal" />
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-slate-300">
-              Executive Function OS · Research preview 0.9.0-beta
-            </span>
-          </div>
-          <h1 className="mb-4 text-4xl font-bold tracking-tight text-balance md:text-6xl">
-            Executive Function OS
-          </h1>
-          <p className="text-lg text-brand-teal md:text-xl font-medium">A computational model of cognitive network breakdown.</p>
-          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-slate-400 md:text-base">
-            This application simulates how cognitive load may disrupt the translation from intention into action. The visualizations are representations within a theoretical framework, not clinical measurements of brain activity.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Link
-              href="/simulator"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-sm font-semibold text-white shadow-xl transition hover:bg-brand-blue-hover active:scale-[0.98]"
-            >
-              <Network className="h-5 w-5" />
-              Try the Phase Predictor.
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/engine"
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-sm font-semibold backdrop-blur-sm transition hover:bg-white/15"
-            >
-              <FlaskConical className="h-5 w-5" />
-              Open the Analysis Engine.
-            </Link>
-          </div>
-        </div>
-      </header>
+      <FlightRecorderHero />
 
       <section className="relative z-20 mx-auto max-w-5xl -mt-16 px-5 space-y-6">
         <Card className="border-border shadow-2xl">
@@ -100,7 +67,7 @@ export default function Home() {
                       <tr>
                         <td className="px-4 py-2 font-medium text-foreground">Conversation State</td>
                         <td className="px-4 py-2">Knowledge Graph + Timeline</td>
-                        <td className="px-4 py-2">Dynamic network of actors, obligations, status</td>
+                        <td className="px-4 py-2">Near real-time after initial indexing; dynamic filters query cached graph.</td>
                       </tr>
                       <tr>
                         <td className="px-4 py-2 font-medium text-foreground">Executive Function Gaps</td>
@@ -115,7 +82,7 @@ export default function Home() {
                       <tr>
                         <td className="px-4 py-2 font-medium text-foreground">Observer vs Operator</td>
                         <td className="px-4 py-2">Text Classification</td>
-                        <td className="px-4 py-2">Ground truth vs belief divergence</td>
+                        <td className="px-4 py-2">Ground truth vs belief divergence (e.g. inferred vs recorded paths)</td>
                       </tr>
                     </tbody>
                   </table>
