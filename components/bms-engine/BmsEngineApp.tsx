@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { useGoogleLogin, googleLogout } from "@react-oauth/google";
+import { signIn, signOut, useSession } from "next-auth/react";
 import {
   LineChart,
   Line,
@@ -393,7 +393,6 @@ export default function BmsEngineApp() {
   const [consent, setConsent] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [rawEvents, setRawEvents] = useState<NormalizedActivity[]>([]);
   const [extractStep, setExtractStep] = useState<string>("");
   const [extracting, setExtracting] = useState(false);
   const [preprocess, setPreprocess] = useState<PreprocessOptions>({
@@ -414,16 +413,35 @@ export default function BmsEngineApp() {
   const [researchNote, setResearchNote] = useState("");
 
   const usingEnvOverride = Boolean(process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
+  const [rawEvents, setRawEvents] = useState<NormalizedActivity[]>([]);
 
-  const login = useGoogleLogin({
-    scope: "https://www.googleapis.com/auth/drive.activity.readonly",
-    onSuccess: async (tok) => {
-      setAccessToken(tok.access_token);
-    },
-  });
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      if ((session as any).isMock) {
+        setAccessToken("mock-sandbox-token");
+      } else {
+        setAccessToken((session as any).accessToken ?? null);
+      }
+    }
+  }, [session]);
 
   const runExtract = useCallback(async () => {
     if (!accessToken) return;
+    
+    // Developer Sandbox mock bypass
+    if (accessToken === "mock-sandbox-token") {
+      setExtracting(true);
+      setExtractStep("Simulating extraction natively in Developer Sandbox...");
+      setTimeout(() => {
+        setRawEvents(eventsFromDemo());
+        setExtractStep("");
+        setExtracting(false);
+      }, 1500);
+      return;
+    }
+
     setExtracting(true);
     setExtractStep("Fetching activity logs (last 180 days)…");
     try {
@@ -477,7 +495,7 @@ export default function BmsEngineApp() {
   };
 
   const onLogout = () => {
-    googleLogout();
+    signOut();
     setAccessToken(null);
     setRawEvents([]);
     setAnalysis(null);
@@ -623,25 +641,24 @@ export default function BmsEngineApp() {
                 <CardContent className="space-y-4">
                   {!usingEnvOverride && (
                     <p className="text-sm text-muted-foreground">
-                      Using bundled public OAuth client ID. Set{" "}
-                      <code className="rounded bg-muted px-1">NEXT_PUBLIC_GOOGLE_CLIENT_ID</code> to
-                      override for your deployment.
+                      Using Google OAuth credentials from setup or Developer Sandbox.
                     </p>
                   )}
                   <div className="flex flex-wrap gap-2">
-                    <Button
-                      onClick={() => login()}
-                      className="bg-[#1E40AF] hover:bg-[#1E3A8A]"
-                    >
-                      Sign in with Google
-                    </Button>
-                    {accessToken && (
+                    {!session ? (
+                      <Button
+                        onClick={() => signIn()}
+                        className="bg-[#1E40AF] hover:bg-[#1E3A8A]"
+                      >
+                        Sign in to connect
+                      </Button>
+                    ) : (
                       <>
                         <Button variant="secondary" onClick={runExtract} disabled={extracting}>
                           {extracting ? "Extracting…" : "Extract network data"}
                         </Button>
                         <Button variant="ghost" onClick={onLogout}>
-                          Sign out
+                          Sign out ((session as any)?.isMock ? "Sandbox" : "Google")
                         </Button>
                       </>
                     )}
