@@ -12,6 +12,7 @@ import {
   Microscope,
   Network,
   Shield,
+  Activity,
 } from "lucide-react";
 import {
   Accordion,
@@ -184,12 +185,20 @@ export default function Home() {
             <Layers className="h-6 w-6 text-brand-teal" />
             Collaborators & participation
           </h2>
-          <Button asChild size="lg" className="bg-brand-blue hover:bg-brand-blue-hover mt-4">
-            <Link href="/engine">
-              <Shield className="mr-2 h-4 w-4" />
-              Join the research (open engine)
-            </Link>
-          </Button>
+          <div className="flex justify-center gap-4 mt-4 flex-wrap">
+            <Button asChild size="lg" className="bg-brand-blue hover:bg-brand-blue-hover">
+              <Link href="/engine">
+                <Shield className="mr-2 h-4 w-4" />
+                Join the research (open engine)
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="bg-transparent border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-brand-dark">
+              <Link href="/open-human-pilots">
+                <Activity className="mr-2 h-4 w-4" />
+                View OpenHuman Pilots (n=1)
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
