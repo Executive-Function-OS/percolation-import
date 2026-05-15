@@ -31,9 +31,12 @@ export default function FlightRecorderHero() {
             </p>
           </div>
           
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
+            <Link href="/quick-start" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded font-medium text-sm transition-colors flex items-center gap-2 shadow-lg shadow-emerald-900/20">
+              <Activity className="w-4 h-4" /> Get Your Score (5 min) <ArrowRight className="w-4 h-4" />
+            </Link>
             <Link href="/simulator" className="px-5 py-2.5 bg-brand-blue hover:bg-blue-600 text-white rounded font-medium text-sm transition-colors flex items-center gap-2 shadow-lg shadow-blue-900/20">
-              <Activity className="w-4 h-4" /> Try Phase Predictor <ArrowRight className="w-4 h-4" />
+              Phase Predictor
             </Link>
             <Link href="/architecture" className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded font-medium text-sm transition-colors flex items-center gap-2 border border-slate-700">
               <TerminalSquare className="w-4 h-4" /> Architecture
