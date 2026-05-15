@@ -26,6 +26,8 @@ import { Card, CardContent } from "@/components/ui/card";
 // Correctly imports from the ROOT components folder using the @ alias
 import AIEngine from "@/components/AIEngine";
 import FlightRecorderHero from "@/components/FlightRecorderHero";
+import FAQSection from "@/components/FAQSection";
+import NewsletterSignup from "@/components/NewsletterSignup";
 
 export default function Home() {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
@@ -183,13 +185,16 @@ export default function Home() {
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 flex items-center justify-center gap-2 text-xl font-bold md:text-2xl">
             <Layers className="h-6 w-6 text-brand-teal" />
-            Collaborators & participation
+            Collaborators & Participation
           </h2>
+          <p className="text-brand-teal/80 mb-8 max-w-xl mx-auto">
+            EFOS relies on open-source contributions, independent N=1 pilots, and interdisciplinary academic partnerships. 
+          </p>
           <div className="flex justify-center gap-4 mt-4 flex-wrap">
             <Button asChild size="lg" className="bg-brand-blue hover:bg-brand-blue-hover">
-              <Link href="/engine">
-                <Shield className="mr-2 h-4 w-4" />
-                Join the research (open engine)
+              <Link href="/researchers">
+                <Microscope className="mr-2 h-4 w-4" />
+                For Researchers & Labs
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="bg-transparent border-brand-teal text-brand-teal hover:bg-brand-teal hover:text-brand-dark">
@@ -199,7 +204,29 @@ export default function Home() {
               </Link>
             </Button>
           </div>
+          
+          <div className="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 text-left max-w-2xl mx-auto backdrop-blur-sm">
+            <div className="flex items-start gap-4">
+              <Shield className="w-8 h-8 text-brand-teal shrink-0 mt-1" />
+              <div>
+                <h4 className="font-bold text-white mb-2 text-lg">Our Data Contribution Promise</h4>
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  We will never sell your data, you can delete it anytime, and you'll see exactly how aggregated insights improve the model. This is a privacy-first platform built for computational psychiatry, not targeted advertising.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
+
+      {/* --- FAQ SECTION --- */}
+      <section className="px-5 py-12 bg-white">
+        <FAQSection />
+      </section>
+
+      {/* --- NEWSLETTER SECTION --- */}
+      <section className="px-5 py-20 bg-slate-100 border-t border-border">
+        <NewsletterSignup />
       </section>
 
       <footer className="border-t border-border px-5 py-12">
