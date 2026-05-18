@@ -22,13 +22,22 @@ mkdocs serve
 
 Then open `http://127.0.0.1:8000` in your browser.
 
-## Deploy to GitHub Pages
+## Deploy to Vercel
 
-```bash
-mkdocs gh-deploy
-```
+Since you use Vercel, deploying this MkDocs site alongside your existing project is straightforward. You have two main options:
 
-This builds the site and pushes it to the `gh-pages` branch of your repository.
+**Option 1: Deploy as a separate Vercel Project (Recommended for a subdomain like `docs.executivefunctionos.com`)**
+1. Go to your Vercel Dashboard and click **Add New... > Project**.
+2. Import the `percolation-import` repository.
+3. In the project configuration:
+   - **Root Directory**: Click Edit and select `mkdocs-efos`.
+   - **Framework Preset**: Other
+   - **Build Command**: `pip install -r requirements.txt && mkdocs build`
+   - **Output Directory**: `site`
+4. Click **Deploy**.
+
+**Option 2: Deploy under your existing Next.js app (e.g., `executivefunctionos.com/docs`)**
+You can configure Next.js to serve the MkDocs generated site. This requires modifying your build pipeline to run MkDocs, then copying the `site` folder into the Next.js `public/docs` folder before building Next.js. Let me know if you prefer this approach and I can set it up for you!
 
 ## Next Steps
 
