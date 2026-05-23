@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowLeft, BookOpen, Users, Database, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, BookOpen, Users, Database, Github, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
