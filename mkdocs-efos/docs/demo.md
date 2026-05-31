@@ -117,9 +117,7 @@ Current checks are internal: face validity, logical consistency, and verificatio
 
 ---
 
-## Interactive Simulator (Placeholder)
+## Interactive Simulator
 
-<div class="admonition note" style="text-align: center; padding: 2rem; background: var(--md-code-bg-color); border-radius: 0.5rem;">
-  <p><strong>Interactive widget will be embedded here.</strong></p>
-  <p>Stress Percolation Slider | Graph Visualization | Real-time Fragmentation Score</p>
-</div>
+<iframe src="/simulator" style="width: 100%; height: 800px; border: 1px solid var(--md-code-bg-color); border-radius: 0.5rem; background: transparent; margin-top: 1rem;"></iframe>
+

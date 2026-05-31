@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "(pip install -r mkdocs-efos/requirements.txt || pip3 install -r mkdocs-efos/requirements.txt || true) && (python3 -m mkdocs build -f mkdocs-efos/mkdocs.yml || true) && (cp -r mkdocs-efos/site/* public/ || true) && next build",
     "start": "next start",
     "lint": "eslint .",
     "test": "vitest run"

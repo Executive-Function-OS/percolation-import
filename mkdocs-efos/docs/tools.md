@@ -2,7 +2,7 @@
 
 ## BMS 4.0 Percolation Engine
 
-[**Analysis Engine**](https://demo.executivefunctionos.com/engine) — Client-side only. OAuth data ingestion and percolation exports. 
+[**Analysis Engine**](/engine) — Client-side only. OAuth data ingestion and percolation exports. 
 All processing stays in your browser — zero server access to your Drive.
 
 > **Research-grade privacy.** [Audit source](https://github.com/erikssonaicloud-gif/percolation-import)
@@ -11,7 +11,7 @@ All processing stays in your browser — zero server access to your Drive.
 
 ## Phase Simulator
 
-[**Interactive visualization**](https://demo.executivefunctionos.com/simulator) — Watch how increasing stress degrades executive bridges between Observer and Operator.
+[**Interactive visualization**](/simulator) — Watch how increasing stress degrades executive bridges between Observer and Operator.
 
 **Cognitive State Percolation:** Executive bridge links fail at 1.5× probability compared to internal cluster nodes.
 
@@ -19,7 +19,7 @@ All processing stays in your browser — zero server access to your Drive.
 
 ## Battle Map (Archive)
 
-[**The Terrain Before the Theory**](https://demo.executivefunctionos.com/battle-map)
+[**The Terrain Before the Theory**](/battle-map)
 
 This is the conceptual system that helped define the territory before it could be modeled computationally. 
 It preserves the original language layer that made the computational model possible.
