@@ -4,49 +4,46 @@ hide:
   - toc
 ---
 
-# Executive Function OS
+# Executive Function OS (EFOS)
 
-## Percolation-Theoretic Analysis of Digital Interaction Graphs
+## Privacy-Preserving Digital Phenotyping Infrastructure
 
 <div class="grid cards" markdown>
 
--   :material-run-fast: **Demo** · **Type your scenario**
--   :material-chart-line: **Methodology** · **From digital trace to system state**
--   :material-code-braces: **Tools** · **Integrate with your workflow**
--   :material-science: **Research** · **Computational psychiatry & AI alignment**
+-   :material-run-fast: **Demo** · **Run the interactive simulation**
+-   :material-chart-line: **Methodology** · **From behavioral trace to structural phenotype**
+-   :material-code-braces: **Tools** · **Integrate with analysis pipelines**
+-   :material-science: **Research** · **Computational psychiatry & digital phenotyping**
 
 </div>
 
 <p style="font-size: 1.2rem;">
-Research platform: percolation-theoretic analysis of digital interaction graphs with DBSCAN behavioral modes. 
-Client-side architecture — zero server access.
+Executive Function OS (EFOS) is an open-source, client-side framework that converts naturalistic behavioral trace data into quantitative structural phenotypes of executive function using DBSCAN clustering and percolation-based network analysis.
 </p>
 
-## :material-account-group: For different audiences
+## :material-account-group: Core Audiences & Enablement
 
-=== "🧠 Researchers"
+=== "🧠 Researchers & Clinicians"
 
-    Explore the percolation model, DBSCAN pipeline, and HybridRAG architecture. 
-    See the [Methodology](methodology.md) and [Research](research.md) sections.
+    Explore the percolation model, DBSCAN pipeline, and how client-side processing enables quantitative digital phenotyping for privacy-sensitive cohorts. See the [Methodology](methodology.md) and [Research](research.md) sections.
 
-=== "⚙️ Neurodivergent Professionals"
+=== "📊 Data Pipeline Integrators"
 
-    Use the [tools](tools.md) to map your system state, identify bottlenecks, and regain execution pathways.
-    Start with the **Demo** to classify your current system type.
+    Leverage our structured local outputs (PDF, GraphML, CSV, JSON) for downstream statistical analysis and AI pipelines without exposure of raw interaction data. See the [Tools](tools.md) page.
 
-=== "🛠️ Builders & Engineers"
+=== "🛠️ Code Contributors & Auditors"
 
-    Integrate the BMS 4.0 Percolation Engine into your own tools. Read the [architecture overview](https://github.com/erikssonaicloud-gif/percolation-import) and explore the [HybridRAG pipeline](methodology.md#hybridrag-expansion).
+    Audit our local calculation core or contribute to the open codebase. Read the [architecture overview](https://github.com/erikssonaicloud-gif/percolation-import) and explore the [HybridRAG pipeline](methodology.md#hybridrag-expansion).
 
 ---
 
 ## About the Project
 
-Executive Function OS is a research platform that models cognitive fragmentation using percolation theory. 
-It translates digital behavioral traces into system states (Observer → Operator) and provides a transparent, reproducible tool for computational psychiatry.
+EFOS is a privacy-preserving digital phenotyping infrastructure for computational psychiatry and life-sciences research. By modeling how cognitive interaction networks fragment under simulated stress, it translates passive behavioral trace data into reproducible structural metrics of executive function. All computation runs locally – no raw data leaves the user’s device.
 
 [Check the Demo :material-arrow-right:](demo.md){ .md-button .md-button--primary }
 [Read the full methodology :material-arrow-right:](methodology.md){ .md-button }
 
 !!! info "Privacy-first design"
-    All processing happens in your browser. No file contents are uploaded to any server.
+    All processing happens in your browser. No file contents or activity traces are uploaded to any server. EFOS is a research tool, not a clinical diagnostic.
+

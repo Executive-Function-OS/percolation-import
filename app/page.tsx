@@ -131,20 +131,20 @@ export default function Home() {
             <p className="text-sm text-muted-foreground">OAuth data ingestion and percolation exports.</p>
           </Link>
 
-          <Link href="/battle-map" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--indigo)]/40">
+          <Link href="/open-human-pilots" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-[var(--indigo)]/40">
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--indigo-dim)] transition group-hover:bg-[var(--indigo)]">
-              <Map className="h-7 w-7 text-[var(--indigo)] group-hover:text-white" />
+              <Activity className="h-7 w-7 text-[var(--indigo)] group-hover:text-white" />
             </div>
-            <h3 className="mb-3 text-lg font-bold">Battle map</h3>
-            <p className="text-sm text-muted-foreground">Original navigation framework for corrupted systems.</p>
+            <h3 className="mb-3 text-lg font-bold">Pilot Dashboard</h3>
+            <p className="text-sm text-muted-foreground">Interactive open-science cohort visualization.</p>
           </Link>
 
-          <Link href="/bms" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-pink-500/40">
+          <Link href="/researchers" className="group rounded-[2rem] border border-border bg-card p-8 shadow-xl transition hover:-translate-y-1 hover:border-pink-500/40">
             <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-pink-50 transition group-hover:bg-pink-500">
               <Brain className="h-7 w-7 text-pink-500 group-hover:text-white" />
             </div>
-            <h3 className="mb-3 text-lg font-bold">BMS Protocol</h3>
-            <p className="text-sm text-muted-foreground">Earlier paste-based coupling view with notes.</p>
+            <h3 className="mb-3 text-lg font-bold">Research Framework</h3>
+            <p className="text-sm text-muted-foreground">Academic collaboration and pre-registration details.</p>
           </Link>
         </div>
       </section>

@@ -1,18 +1,18 @@
-# Demo: Executive Function OS
+# Demo: Executive Function OS (EFOS)
 
-*Cognitive Flight Recorder / Translation Manual*
+*Structural Phenotype Visualizations & System States*
 
 ---
 
 ## Observer Layer: Raw Trace
 
-The raw, unfiltered digital footprint of activity before interpretation.
+The raw, unfiltered digital footprint of activity before network construction.
 
 <div class="grid cards" markdown>
 
--   **Density:** `Variable`
--   **Status:** `Monitoring`
--   **Timestamp:** `23:04:04 GMT`
+-   **Trace Ingestion:** `Active`
+-   **State Projection:** `DBSCAN Clustering`
+-   **Reference Time:** `23:04:04 GMT`
 
 </div>
 
@@ -28,34 +28,34 @@ The raw, unfiltered digital footprint of activity before interpretation.
 
 ![Type 1 diagram](assets/type1.svg)
 
-A healthy system with clear goals.
+Low fragmentation; effort-outcome relationship remains tractable.
 
 - **Observer:** Predictable outcome loops
-- **Operator:** Belief aligns with reality
+- **Operator:** Action execution aligned with awareness
 
 ### Type 2 — Complex Navigable
 
 ![Type 2 diagram](assets/type2.svg)
 
-Intricate system requiring navigation.
+Moderate fragmentation; probabilistic but navigable with targeted strategy.
 
 - **Observer:** Branching clusters
-- **Operator:** Probabilistic heuristics
+- **Operator:** Probabilistic heuristics and adaptation
 
 ### Type 3 — Corrupted
 
 ![Type 3 diagram](assets/type3.svg)
 
-Repetitive, unproductive cycling.
+High fragmentation and coupling; repetitive, unproductive cycling.
 
-- **Observer:** Inverse outcomes
-- **Operator:** Dominated by corrupted installations
+- **Observer:** Disconnected action loops
+- **Operator:** Operational output dominated by noise clusters
 
 ### Type 4 — Paradox System
 
 ![Type 4 diagram](assets/type4.svg)
 
-Extreme fragmentation or lock-in — both pathological extremes in this model.
+Extreme fragmentation or complete topological lock-in.
 
 </div>
 
@@ -63,20 +63,20 @@ Extreme fragmentation or lock-in — both pathological extremes in this model.
 
 ---
 
-## Intervention Threshold
+## Percolation Threshold
 
 !!! warning "Alert"
-    **Critical point prior to collapse. Trigger BMS 4.0 Protocols**
-
+    **Percolation threshold ($p_c$) reached. Cognitive network connectivity degraded.**
 
 ---
 
 ## Operator Output Layer
 
-**Resolved** — Post-intervention state. The clean, optimized action layer.
+**Post-Perturbation State:** The processed and structured action representation.
 
-- **Fragmentation:** `0.42% (Stabilized)`
-- **Operator Inference:** `Successfully Exited`
+- **Fragmentation Score:** `0.42% (Stabilized)`
+- **Operator Inference:** `Active execution restored`
+
 
 ---
 
