@@ -113,7 +113,7 @@ The percolation simulation shows how network connectivity changes under stress. 
 
 Current checks are internal: face validity, logical consistency, and verification under assumed parameters. External validation against N=1 or larger cohort data is ongoing. The goal is a transparent, reproducible tool for computational psychiatry.
 
-[Learn about the Planned Case-File Pipeline :material-arrow-right:](https://github.com/erikssonaicloud-gif/percolation-import)
+[Learn about the Planned Case-File Pipeline :material-arrow-right:](https://github.com/Executive-Function-OS/percolation-import)
 
 ---
 

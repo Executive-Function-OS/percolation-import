@@ -33,7 +33,7 @@ Executive Function OS (EFOS) is an open-source, client-side framework that conve
 
 === "🛠️ Code Contributors & Auditors"
 
-    Audit our local calculation core or contribute to the open codebase. Read the [architecture overview](https://github.com/erikssonaicloud-gif/percolation-import) and explore the [HybridRAG pipeline](methodology.md#hybridrag-expansion).
+    Audit our local calculation core or contribute to the open codebase. Read the [architecture overview](https://github.com/Executive-Function-OS/percolation-import) and explore the [HybridRAG pipeline](methodology.md#hybridrag-expansion).
 
 ---
 

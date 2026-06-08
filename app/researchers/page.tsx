@@ -56,7 +56,7 @@ export default function ResearchersPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-brand-blue mt-0.5">•</span>
-                  <span><strong>Client-Side Processing:</strong> Zero-knowledge architecture for secure data handling.</span>
+                  <span><strong>Client-Side Processing:</strong> Local computation pipeline for secure data handling.</span>
                 </li>
               </ul>
             </div>

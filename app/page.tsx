@@ -100,8 +100,71 @@ export default function Home() {
             </div>
 
             <div className="border-t border-border pt-6">
-              <h3 className="text-lg font-bold text-foreground mb-2">Validation & Next Steps</h3>
-              <p className="mb-3">Current checks are internal: face validity, logical consistency, and verification under assumed parameters. External validation against N=1 or larger cohort data is ongoing. The goal is a transparent, reproducible tool for computational psychiatry.</p>
+              <h3 className="text-lg font-bold text-foreground mb-3">Comparative Analysis</h3>
+              <p className="mb-4">
+                Established open-source digital phenotyping platforms like <strong>mindLAMP</strong> (BIDMC/Harvard; 120+ publications, deployed in multi-site trials) and <strong>Beiwe</strong> (Onnela Lab, Harvard; used in hundreds of studies) provide rich data capture and feature extraction. They typically rely on centralized servers and do not apply network-level structural modeling. EFOS complements these tools by offering a fully client-side, percolation-based structural analysis of cognitive fragmentation, producing privacy-preserving outputs designed for AI-native research.
+              </p>
+              <div className="rounded-xl border border-border overflow-hidden bg-slate-50/50 mb-4">
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs">
+                    <thead className="bg-slate-100/50 border-b border-border text-foreground">
+                      <tr>
+                        <th className="px-4 py-2 font-semibold">Differentiator</th>
+                        <th className="px-4 py-2 font-semibold">mindLAMP (BIDMC/Harvard)</th>
+                        <th className="px-4 py-2 font-semibold">Beiwe (Onnela Lab, Harvard)</th>
+                        <th className="px-4 py-2 font-semibold text-brand-blue font-bold">EFOS (Ours)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-border text-muted-foreground">
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Primary Data Source</td>
+                        <td className="px-4 py-2">Active surveys & passive sensor logs</td>
+                        <td className="px-4 py-2">Passive sensors (GPS, accelerometer)</td>
+                        <td className="px-4 py-2 font-semibold text-slate-800">Passive interaction logs (Google OAuth)</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Data Processing</td>
+                        <td className="px-4 py-2">Centralized database (Cortex)</td>
+                        <td className="px-4 py-2">Centralized backend server</td>
+                        <td className="px-4 py-2 font-semibold text-slate-800">Fully local client-side (local computation)</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Modeling Method</td>
+                        <td className="px-4 py-2">Statistical time-series feature sets</td>
+                        <td className="px-4 py-2">Statistical behavioral metrics</td>
+                        <td className="px-4 py-2 font-semibold text-slate-800">Percolation graph theory & DBSCAN</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Security Footprint</td>
+                        <td className="px-4 py-2">Decoupled server database</td>
+                        <td className="px-4 py-2">Server database & service center</td>
+                        <td className="px-4 py-2 font-semibold text-slate-800">No raw data leaves the client device</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Output Type</td>
+                        <td className="px-4 py-2">Direct sensor aggregates</td>
+                        <td className="px-4 py-2">Raw/aggregated sensor metrics</td>
+                        <td className="px-4 py-2 font-semibold text-slate-800">Anonymized structural phenotypes</td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-foreground">Diagnostic Status</td>
+                        <td className="px-4 py-2">Clinical research tool</td>
+                        <td className="px-4 py-2">Clinical research tool</td>
+                        <td className="px-4 py-2 font-semibold text-slate-800">Research tool (Not clinical diagnostic)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div className="border-t border-border pt-6">
+              <h3 className="text-lg font-bold text-foreground mb-2">Current Status & Traction</h3>
+              <ul className="list-disc pl-5 space-y-2 mb-3">
+                <li><strong>Public codebase:</strong> Full source code, unit tests (Vitest), and DBSCAN/percolation pipeline <a href="https://github.com/Executive-Function-OS/percolation-import" target="_blank" rel="noopener noreferrer" className="text-brand-blue hover:underline">publicly available under MIT license</a> with an active issue tracker and roadmap.</li>
+                <li><strong>Interactive demo:</strong> A live client-side analysis engine and <Link href="/simulator" className="text-brand-blue hover:underline">Phase Simulator</Link> demonstrating ingestion, clustering, and percolation simulation.</li>
+                <li><strong>Validation:</strong> Internal proof-of-concept completed on simulated and limited real data (n=1). An external pilot validation cohort (target N=30–50) is actively recruiting via the <Link href="/open-human-pilots" className="text-brand-blue hover:underline">Pilot page</Link> to test convergent validity against BRIEF-A/BDEFS. Early sign-ups and community feedback indicate growing interest from computational psychiatry researchers.</li>
+              </ul>
               <Link href="/architecture" className="inline-flex items-center gap-1 text-sm font-semibold text-brand-teal hover:underline mt-2">
                 Planned Case-File Pipeline <ArrowRight className="w-4 h-4" />
               </Link>

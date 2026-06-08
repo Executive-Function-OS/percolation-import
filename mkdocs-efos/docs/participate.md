@@ -32,7 +32,7 @@ We are seeking academic and clinical research collaborations with:
 
 The BMS 4.0 Percolation Engine is open source and open to audit. Fork the repository, add unit tests, or improve the network clustering algorithms.
 
-[GitHub Repository →](https://github.com/erikssonaicloud-gif/percolation-import)
+[GitHub Repository →](https://github.com/Executive-Function-OS/percolation-import)
 
 ### 📧 Contact
 

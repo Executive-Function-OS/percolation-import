@@ -44,7 +44,7 @@ graph TD
 ### Setup & Run
 1. Clone the repository:
    ```bash
-   git clone https://github.com/erikssonaicloud-gif/percolation-import.git
+   git clone https://github.com/Executive-Function-OS/percolation-import.git
    cd percolation-import
    ```
 2. Initialize Node v20 via `fnm` (if using fnm):

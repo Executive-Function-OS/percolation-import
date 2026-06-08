@@ -3,8 +3,8 @@ site_description: "Research platform: percolation-theoretic analysis of digital 
 site_author: "Anni Eriksson"
 site_url: "https://demo.executivefunctionos.com/"
 
-repo_name: "erikssonaicloud-gif/percolation-import"
-repo_url: "https://github.com/erikssonaicloud-gif/percolation-import"
+repo_name: "Executive-Function-OS/percolation-import"
+repo_url: "https://github.com/Executive-Function-OS/percolation-import"
 edit_uri: "blob/main/docs/"
 
 copyright: "Copyright &copy; 2025 Executive Function OS"
@@ -47,7 +47,7 @@ theme:
 extra:
   social:
     - icon: "fontawesome/brands/github"
-      link: "https://github.com/erikssonaicloud-gif/percolation-import"
+      link: "https://github.com/Executive-Function-OS/percolation-import"
       name: "Source Code"
   generator: false
   analytics:
@@ -79,6 +79,9 @@ markdown_extensions:
       generic: true
   - "pymdownx.tasklist":
       custom_checkbox: true
+  - "pymdownx.emoji":
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 extra_javascript:
   - "javascripts/katex.js"
@@ -94,5 +97,6 @@ nav:
   - "Methodology": "methodology.md"
   - "Tools": "tools.md"
   - "Research": "research.md"
+  - "Grants & Roadmap": "grants.md"
   - "Participate": "participate.md"
   - "About": "about.md"

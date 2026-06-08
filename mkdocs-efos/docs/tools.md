@@ -5,7 +5,7 @@
 [**Analysis Engine**](/engine) — Client-side only. OAuth data ingestion and percolation exports. 
 All processing stays in your browser — zero server access to your Drive.
 
-> **Research-grade privacy.** [Audit source](https://github.com/erikssonaicloud-gif/percolation-import)
+> **Research-grade privacy.** [Audit source](https://github.com/Executive-Function-OS/percolation-import)
 
 ---
 

@@ -52,5 +52,5 @@ See [Participate](participate.md) for how to get involved.
 
 The core engine is available for audit and contribution:
 
-[github.com/erikssonaicloud-gif/percolation-import](https://github.com/erikssonaicloud-gif/percolation-import)
+[github.com/Executive-Function-OS/percolation-import](https://github.com/Executive-Function-OS/percolation-import)
 

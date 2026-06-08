@@ -70,7 +70,7 @@ const LS_CONSENT = "bms40_consent_v1";
 const LS_RESULTS = "bms40_analysis_snapshot_v1";
 
 const githubRepo =
-  process.env.NEXT_PUBLIC_GITHUB_REPO ?? "https://github.com/erikssonaicloud-gif/percolation-import";
+  process.env.NEXT_PUBLIC_GITHUB_REPO ?? "https://github.com/Executive-Function-OS/percolation-import";
 
 function stripGraphForStorage(a: EngineAnalysis): EngineAnalysis {
   const { graph: _g, nodeIds: _n, ...rest } = a;

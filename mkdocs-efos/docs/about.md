@@ -33,7 +33,7 @@ BMS 4.0 Percolation Engine — Current stable version.
 
 ## Links
 
-- [GitHub Repository](https://github.com/erikssonaicloud-gif/percolation-import)
+- [GitHub Repository](https://github.com/Executive-Function-OS/percolation-import)
 - [Live Demo](https://demo.executivefunctionos.com/)
 - [Contact](mailto:anni@executivefunctionos.com)
 

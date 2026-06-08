@@ -47,7 +47,7 @@ export default function InternalDocsPage() {
           <h3 className="text-xl font-bold text-brand-blue mt-8 mb-4">The Study Design</h3>
           <p className="text-slate-600 mb-4 leading-relaxed">A hybrid 8-week intensive longitudinal study evaluating the convergent validity of our client-side computed "Fragmentation Score."</p>
           <ul className="list-disc pl-6 text-slate-600 mb-4 space-y-2">
-            <li><strong>Data Collection:</strong> Participants run our zero-knowledge, client-side engine on ≥6 months of digital trace data.</li>
+            <li><strong>Data Collection:</strong> Participants run our local, client-side engine on ≥6 months of digital trace data.</li>
             <li><strong>Clinical Measures:</strong> Baseline and endpoint BDEFS, BRIEF-A, PHQ-9, GAD-7, and PSS-10.</li>
             <li><strong>EMA:</strong> Weekly 3-minute ecological momentary assessments of subjective EF and life events.</li>
             <li><strong>Hypothesis:</strong> EFOS fragmentation scores will correlate strongly with BDEFS/BRIEF-A scores and demonstrate temporal stability, offering a novel digital phenotype for task paralysis.</li>
