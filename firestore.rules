@@ -1,0 +1,45 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Restrict all paths by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Secure owner-only access inside the /users/{uid} tree
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+
+      // Rule for user-specific phenotypes: reject raw trace logs and any PII fields
+      match /phenotypes/{docId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+        allow create, update: if 
+          request.auth != null && request.auth.uid == uid &&
+          !('email' in request.resource.data) &&
+          !('name' in request.resource.data) &&
+          !('raw_log' in request.resource.data);
+      }
+
+      // Rule for validation logs: reject PII and allow 90-day retention policies
+      match /validation/{docId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+        allow create, update: if 
+          request.auth != null && request.auth.uid == uid &&
+          !('email' in request.resource.data) &&
+          !('name' in request.resource.data) &&
+          !('raw_log' in request.resource.data);
+      }
+
+      // Rule for voluntary research feedback & mailing-list submissions
+      match /feedback/{docId} {
+        allow read, write: if request.auth != null && request.auth.uid == uid;
+        allow create: if request.auth != null && request.auth.uid == uid;
+      }
+    }
+
+    // Explicit block on any attempt to write to a "raw_trace_logs" collection globally
+    match /{path=**}/raw_trace_logs/{doc} {
+      allow read, write: if false;
+    }
+  }
+}

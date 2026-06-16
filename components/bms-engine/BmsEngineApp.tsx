@@ -52,6 +52,9 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import { useFirebase } from "@/hooks/useFirebase";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 import type { EngineAnalysis, NormalizedActivity, PreprocessOptions } from "@/lib/research/types";
 import type { ExpertOptions } from "@/lib/research/types";
@@ -416,6 +419,26 @@ export default function BmsEngineApp() {
   const [rawEvents, setRawEvents] = useState<NormalizedActivity[]>([]);
 
   const { data: session } = useSession();
+
+  const {
+    firebaseActive,
+    user,
+    optInPhenotypes,
+    optInValidation,
+    syncState,
+    setConsentPhenotypes,
+    setConsentValidation,
+    saveAnonymizedPhenotype,
+    saveValidationOutcome,
+    submitResearchFeedback,
+  } = useFirebase();
+
+  // Auto-sync phenotypes when analysis runs and opt-in is enabled
+  useEffect(() => {
+    if (analysis && firebaseActive && optInPhenotypes) {
+      saveAnonymizedPhenotype(analysis);
+    }
+  }, [analysis, firebaseActive, optInPhenotypes, saveAnonymizedPhenotype]);
 
   useEffect(() => {
     if (session) {
@@ -1103,6 +1126,26 @@ export default function BmsEngineApp() {
                             metric).
                           </p>
                         )}
+                        {firebaseActive && optInValidation && (
+                          <div className="pt-2">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-full sm:w-auto"
+                              onClick={async () => {
+                                try {
+                                  await saveValidationOutcome(crisisDates, validationSummary);
+                                  toast.success("Validation data synchronized successfully!");
+                                } catch (error) {
+                                  toast.error("Failed to sync validation data.");
+                                }
+                              }}
+                              disabled={!crisisDates.trim()}
+                            >
+                              Sync Validation to Research DB
+                            </Button>
+                          </div>
+                        )}
                       </CardContent>
                     </Card>
                   </TabsContent>
@@ -1142,33 +1185,142 @@ export default function BmsEngineApp() {
                           Contribute to cognitive networks research
                         </CardTitle>
                         <CardDescription>
-                          Opt-in is local-only for this demo (no backend). Email is not transmitted
-                          unless you configure a form endpoint. Use exports to share anonymized
-                          metrics with collaborators.
+                          {firebaseActive
+                            ? "Configure your opt-in sharing preferences. No raw logs or private files ever leave your device."
+                            : "Opt-in is local-only for this demo (no backend). Configure a Firebase environment to activate securely."}
                         </CardDescription>
                       </CardHeader>
-                      <CardContent className="space-y-3">
-                        <label className="flex items-center gap-2 text-sm">
-                          <Checkbox disabled />
-                          Share anonymized network metrics (requires backend)
-                        </label>
-                        <label className="flex items-center gap-2 text-sm">
-                          <Checkbox disabled />
-                          Share ground-truth validation outcomes (requires backend)
-                        </label>
-                        <Input
-                          placeholder="Research mailing list email (not sent in this build)"
-                          value={researchEmail}
-                          onChange={(e) => setResearchEmail(e.target.value)}
-                        />
-                        <Textarea
-                          placeholder="Feedback: was the prediction useful?"
-                          value={researchNote}
-                          onChange={(e) => setResearchNote(e.target.value)}
-                        />
+                      <CardContent className="space-y-4">
+                        {firebaseActive && user && (
+                          <div className="rounded-lg bg-muted p-3 text-xs flex justify-between items-center">
+                            <span>
+                              <strong>Status:</strong> Connected securely (Anonymous Mode)
+                            </span>
+                            <span className="font-mono text-muted-foreground bg-background px-1.5 py-0.5 rounded text-[10px]">
+                              UID: {user.uid.slice(0, 8)}...
+                            </span>
+                          </div>
+                        )}
+
+                        <div className="space-y-4">
+                          <label className="flex items-start gap-3 text-sm cursor-pointer select-none">
+                            <Checkbox
+                              checked={optInPhenotypes}
+                              onCheckedChange={(checked) => setConsentPhenotypes(checked === true)}
+                              disabled={!firebaseActive}
+                              className="mt-1"
+                            />
+                            <div>
+                              <p className="font-medium">Share anonymized network metrics</p>
+                              <p className="text-xs text-muted-foreground leading-normal">
+                                Uploads high-level topological phase transition thresholds ($p_c$, density) without any document metadata.
+                              </p>
+                            </div>
+                          </label>
+
+                          <label className="flex items-start gap-3 text-sm cursor-pointer select-none">
+                            <Checkbox
+                              checked={optInValidation}
+                              onCheckedChange={(checked) => setConsentValidation(checked === true)}
+                              disabled={!firebaseActive}
+                              className="mt-1"
+                            />
+                            <div>
+                              <p className="font-medium">Share ground-truth validation outcomes</p>
+                              <p className="text-xs text-muted-foreground leading-normal">
+                                Uploads your marked crisis dates and the corresponding algorithm detection outcomes.
+                              </p>
+                            </div>
+                          </label>
+                        </div>
+
+                        {firebaseActive && (
+                          <div className="flex gap-2 items-center">
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={async () => {
+                                let successCount = 0;
+                                try {
+                                  if (analysis && optInPhenotypes) {
+                                    await saveAnonymizedPhenotype(analysis);
+                                    successCount++;
+                                  }
+                                  if (crisisDates && optInValidation) {
+                                    await saveValidationOutcome(crisisDates, validationSummary);
+                                    successCount++;
+                                  }
+                                  if (successCount > 0) {
+                                    toast.success("Metrics synchronized successfully with Research DB!");
+                                  } else {
+                                    toast.error("Please enable at least one opt-in sharing preference first.");
+                                  }
+                                } catch (e) {
+                                  toast.error("Sync failed: " + (e instanceof Error ? e.message : String(e)));
+                                }
+                              }}
+                              disabled={!analysis || (!optInPhenotypes && !optInValidation)}
+                            >
+                              Sync metrics with Research DB
+                            </Button>
+                            {syncState.status !== "idle" && (
+                              <span className={`text-xs ${syncState.status === "error" ? "text-red-500" : "text-green-500 animate-pulse"}`}>
+                                {syncState.message}
+                              </span>
+                            )}
+                          </div>
+                        )}
+
+                        <hr className="border-border my-2" />
+
+                        <div className="space-y-2">
+                          <Label htmlFor="researchEmail">Research mailing list (optional)</Label>
+                          <Input
+                            id="researchEmail"
+                            type="email"
+                            placeholder="your.email@domain.com"
+                            value={researchEmail}
+                            onChange={(e) => setResearchEmail(e.target.value)}
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="researchNote">Anonymous Feedback / Observations</Label>
+                          <Textarea
+                            id="researchNote"
+                            placeholder="Feedback: was the prediction useful? What cognitive stressors matched these patterns?"
+                            value={researchNote}
+                            onChange={(e) => setResearchNote(e.target.value)}
+                            rows={3}
+                          />
+                        </div>
+
+                        <Button
+                          className="w-full"
+                          onClick={async () => {
+                            if (!researchEmail.trim() && !researchNote.trim()) {
+                              toast.error("Please provide either an email or a feedback note.");
+                              return;
+                            }
+                            if (!firebaseActive) {
+                              toast.info("Offline demo mode: feedback not sent.");
+                              return;
+                            }
+                            try {
+                              await submitResearchFeedback(researchEmail, researchNote);
+                              toast.success("Feedback submitted successfully!");
+                              setResearchNote("");
+                            } catch (e) {
+                              toast.error("Failed to submit feedback. Please try again.");
+                            }
+                          }}
+                        >
+                          Submit Feedback
+                        </Button>
+
                         <Dialog>
                           <DialogTrigger asChild>
-                            <Button variant="secondary">Participation info</Button>
+                            <Button variant="secondary" className="w-full mt-2">Participation info</Button>
                           </DialogTrigger>
                           <DialogContent>
                             <DialogHeader>
@@ -1202,6 +1354,7 @@ export default function BmsEngineApp() {
           </>
         )}
       </div>
+      <Toaster />
     </div>
   );
 }
