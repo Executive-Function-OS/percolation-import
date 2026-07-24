@@ -1,3 +1,10 @@
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Terms of Service',
+  description: 'Terms of service for the Executive Function OS research platform.',
+}
+
 export default function TermsOfService() {
   return (
     <div className="container mx-auto py-12 px-4 max-w-3xl">
