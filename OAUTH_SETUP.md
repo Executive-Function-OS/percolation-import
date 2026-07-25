@@ -79,7 +79,7 @@ Because your application is running locally and has not been verified by Google,
 
 ---
 
-## Step 6: Run and Authenticate
+## Step 6: Run and Authenticate (Local Dev)
 
 1. In your terminal, restart the Next.js development server:
    ```bash
@@ -91,3 +91,59 @@ Because your application is running locally and has not been verified by Google,
 5. *Google will display a warning screen stating that the app is unverified. Click **Advanced** > **Go to Executive Function OS (unsafe)** to proceed.*
 6. Grant read-only access to your Drive Activity logs.
 7. You are now logged in! Click **Extract network data** to process your actual Google Drive history.
+
+> **Don't want to set up a Google Cloud project at all?** `/quick-start` runs the
+> same DBSCAN + percolation pipeline entirely client-side against an uploaded
+> RescueTime-style CSV, or a bundled demo dataset — no OAuth required. On
+> `/engine`, "Developer Sandbox" (password `admin`, listed on the sign-in
+> screen) and "View sample results" also work with zero configuration.
+
+---
+
+## Production Deployment (e.g. demo.executivefunctionos.com)
+
+The steps above configure OAuth for `localhost:3000` only. A deployed
+instance needs its own authorized origin/redirect URI on the **same or a
+separate** OAuth client, plus production environment variables — Google
+callback URLs and `NEXTAUTH_URL` are exact-match, so mixing dev and prod
+values here is the most common cause of a broken production sign-in.
+
+### 1. Add the production origin in Google Cloud Console
+
+On the OAuth client from Step 4 (or a new one dedicated to production):
+
+- **Authorized JavaScript origins:** add `https://demo.executivefunctionos.com`
+- **Authorized redirect URIs:** add
+  `https://demo.executivefunctionos.com/api/auth/callback/google`
+
+### 2. Set environment variables on your host (e.g. Vercel → Project → Settings → Environment Variables)
+
+| Variable | Value |
+|---|---|
+| `GOOGLE_ID` | Same Client ID from Step 4 |
+| `GOOGLE_SECRET` | Same Client Secret from Step 4 |
+| `NEXTAUTH_URL` | `https://demo.executivefunctionos.com` |
+| `NEXTAUTH_SECRET` | A real random secret — generate with `openssl rand -base64 32`. **Required in production**: without it, sessions are signed with a value regenerated on every server restart, which logs everyone out and breaks across multiple server instances. |
+| `NEXT_PUBLIC_GOOGLE_CLIENT_ID` | Same Client ID (cosmetic only — shown in the UI, doesn't gate the OAuth flow itself) |
+
+`NEXTAUTH_URL` in particular is easy to miss: without it, NextAuth silently
+falls back to `http://localhost:3000` for its callback URLs even when
+running on a real domain, which breaks the redirect after Google sign-in.
+
+### 3. Who can actually sign in
+
+While the OAuth consent screen's **Publishing status** is **Testing** (the
+default for a new project), only the up-to-100 accounts listed under **Test
+users** (Step 3 above) can complete sign-in — everyone else gets a
+"this app is blocked" error before they ever reach the unverified-app
+warning. To let it out:
+
+- **Just you (and a few named testers):** add each Google account under
+  **Test users**. Takes a minute, no waiting, works immediately.
+- **Any visitor:** requires submitting the app for
+  [Google's OAuth verification](https://support.google.com/cloud/answer/13463073)
+  — a review of the requested scope (`drive.activity.readonly`, considered
+  sensitive) that typically takes days to weeks and requires a public privacy
+  policy URL (this repo has one at `/privacy`) and homepage. This is an
+  external Google process, not something fixable by changing code — plan for
+  it separately and keep using Testing mode with test users in the meantime.
