@@ -22,33 +22,46 @@ All data remains strictly on your device. The OAuth token is only used by your l
 
 ---
 
-## Step 3: Configure the OAuth Consent Screen
+## Step 3: Configure the OAuth Consent Screen (now called "Google Auth Platform")
 
-Because your application is running locally and has not been verified by Google, you must configure it as an internal/testing application and add your email as a test user.
+> Google restructured this part of the console in 2024–2025. The old
+> "OAuth consent screen" page with a single sequential "Save and Continue"
+> wizard is gone. If you're looking for it and can't find it, that's why —
+> follow the steps below for the current UI instead.
 
-1. In the left sidebar, go to **APIs & Services** > **OAuth consent screen**.
-2. Select **User Type: External** and click **Create**.
-3. Under **App information**:
+1. In the left sidebar (or the top search bar), go to **APIs & Services** >
+   **Google Auth Platform**.
+2. On first visit you'll get a short **Get started** wizard:
    * **App name:** `Executive Function OS`
-   * **User support email:** Select your email address.
-4. Scroll to the bottom and set **Developer contact information** to your email address, then click **Save and Continue**.
-5. In the **Scopes** step:
-   * Click **Add or Remove Scopes**.
-   * In the bottom manually add scope input, paste:
+   * **User support email:** your email address
+   * **Audience:** External
+   * **Contact information:** your email address
+   * Click through to **Create**.
+3. You'll land on an **Overview** page with tabs across the top: **Branding /
+   Audience / Data Access / Clients**. Use these tabs (not a linear wizard)
+   for everything below.
+4. **Audience** tab (**CRITICAL STEP** — this is the old "Test users" step):
+   * Scroll to **Test users** > **+ Add users**.
+   * Enter your Google email address (the same one you will sign in with).
+     *If you skip this, Google blocks your login with a `Developer Error` /
+     "access blocked" screen.*
+5. **Data Access** tab (this is the old "Scopes" step):
+   * Click **Add or remove scopes**.
+   * In the manual scope input at the bottom, paste:
      `https://www.googleapis.com/auth/drive.activity.readonly`
-   * Click **Add to Table** and then **Update**.
-   * Click **Save and Continue**.
-6. In the **Test users** step (**CRITICAL STEP**):
-   * Click **Add Users**.
-   * Enter your Google email address (the same one you will sign in with). *If you omit this, Google will block your login with a `Developer Error`.*
-   * Click **Save and Continue** and then **Back to Dashboard**.
+   * Click **Add to table**, then **Update**, then **Save**.
 
 ---
 
-## Step 4: Create OAuth 2.0 Credentials
+## Step 4: Create OAuth 2.0 Credentials (now under the "Clients" tab)
 
-1. In the left sidebar, click **Credentials**.
-2. Click **+ Create Credentials** at the top and select **OAuth client ID**.
+> The standalone **Credentials** page's "+ Create Credentials > OAuth client
+> ID" flow moved too — it now lives inside Google Auth Platform's **Clients**
+> tab.
+
+1. In **APIs & Services** > **Google Auth Platform**, click the **Clients**
+   tab.
+2. Click **+ Create client**.
 3. Set **Application type** to **Web application**.
 4. Set **Name** to `EFOS Local Host`.
 5. Under **Authorized JavaScript origins**:
@@ -57,7 +70,10 @@ Because your application is running locally and has not been verified by Google,
    * Click **+ Add URI** and enter the NextAuth callback url:
      `http://localhost:3000/api/auth/callback/google`
 7. Click **Create**.
-8. A modal will pop up displaying your **Client ID** and **Client Secret**. Copy these values.
+8. A modal pops up with your **Client ID** and **Client Secret** — copy
+   both now. If you close it before copying, click into the client from the
+   **Clients** list to see the Client ID again and reset the secret if
+   needed.
 
 ---
 
@@ -110,7 +126,9 @@ values here is the most common cause of a broken production sign-in.
 
 ### 1. Add the production origin in Google Cloud Console
 
-On the OAuth client from Step 4 (or a new one dedicated to production):
+Go to **APIs & Services → Google Auth Platform → Clients**, click into the
+client you created in Step 4 (or create a new one dedicated to production),
+and add:
 
 - **Authorized JavaScript origins:** add `https://demo.executivefunctionos.com`
 - **Authorized redirect URIs:** add
