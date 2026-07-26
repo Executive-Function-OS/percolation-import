@@ -1,6 +1,23 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { randomBytes } from "crypto";
+
+// NEXTAUTH_SECRET signs session JWTs (including the Google accessToken they
+// carry). The previous fallback was a fixed string checked into this public
+// repo, so any deployment that forgot to set the real secret was signing
+// sessions with a value anyone could read on GitHub. Falling back to a
+// per-boot random value instead means a missing secret fails safely (logged
+//-out users after a restart) rather than silently insecurely.
+if (!process.env.NEXTAUTH_SECRET) {
+  console.error(
+    "[auth] NEXTAUTH_SECRET is not set. Using a random per-process secret — " +
+      "sessions will not persist across restarts and will break across " +
+      "multiple server instances. Set NEXTAUTH_SECRET in your deployment " +
+      "environment (generate one with `openssl rand -base64 32`)."
+  );
+}
+const devFallbackSecret = randomBytes(32).toString("hex");
 
 const handler = NextAuth({
   providers: [
@@ -52,7 +69,7 @@ const handler = NextAuth({
     },
   },
   session: { strategy: "jwt" },
-  secret: process.env.NEXTAUTH_SECRET ?? "unsecure_default_secret_for_development_xyz789",
+  secret: process.env.NEXTAUTH_SECRET ?? devFallbackSecret,
 });
 
 export { handler as GET, handler as POST };
