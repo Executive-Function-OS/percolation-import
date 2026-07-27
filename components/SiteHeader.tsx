@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: "/researchers", label: "Researchers" },
   { href: "/architecture", label: "Architecture" },
   { href: "/roadmap", label: "Roadmap" },
+  { href: "/battle-map", label: "Archive" },
 ];
 
 export default function SiteHeader() {
