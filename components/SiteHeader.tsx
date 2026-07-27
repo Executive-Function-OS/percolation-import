@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { href: "/open-human-pilots", label: "Pilots" },
   { href: "/researchers", label: "Researchers" },
   { href: "/architecture", label: "Architecture" },
+  { href: "/roadmap", label: "Roadmap" },
 ];
 
 export default function SiteHeader() {
