@@ -9,20 +9,34 @@ import {
 } from "firebase/auth";
 import {
   createTenant as createTenantDoc,
+  getTenant,
   listMyTenantMemberships,
+  removeTenantMember,
+  setTenantMember,
+  type Tenant,
   type TenantMembership,
+  type TenantRole,
 } from "../lib/tenancy";
 
 export function useTenant() {
   const [user, setUser] = useState<User | null>(null);
   const [memberships, setMemberships] = useState<TenantMembership[]>([]);
+  const [tenantDetails, setTenantDetails] = useState<Record<string, Tenant>>({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   const refreshMemberships = useCallback(async (currentUser: User) => {
     if (!db) return;
+    const firestore = db;
     try {
-      setMemberships(await listMyTenantMemberships(db, currentUser.uid));
+      const rows = await listMyTenantMemberships(firestore, currentUser.uid);
+      setMemberships(rows);
+      const details = await Promise.all(
+        rows.map(async (m) => [m.tenantId, await getTenant(firestore, m.tenantId)] as const)
+      );
+      setTenantDetails(
+        Object.fromEntries(details.filter((d): d is [string, Tenant] => d[1] !== null))
+      );
     } catch (err) {
       setError(err instanceof Error ? err.message : "Failed to load tenant memberships.");
     }
@@ -88,5 +102,33 @@ export function useTenant() {
     [user, refreshMemberships]
   );
 
-  return { user, memberships, loading, error, signInForTenantAccess, createTenant };
+  const addMember = useCallback(
+    async (tenantId: string, memberUid: string, email: string | null, role: TenantRole): Promise<void> => {
+      if (!db) throw new Error("Firebase is not configured.");
+      await setTenantMember(db, tenantId, memberUid.trim(), email, role);
+      if (user) await refreshMemberships(user);
+    },
+    [user, refreshMemberships]
+  );
+
+  const removeMember = useCallback(
+    async (tenantId: string, memberUid: string): Promise<void> => {
+      if (!db) throw new Error("Firebase is not configured.");
+      await removeTenantMember(db, tenantId, memberUid);
+      if (user) await refreshMemberships(user);
+    },
+    [user, refreshMemberships]
+  );
+
+  return {
+    user,
+    memberships,
+    tenantDetails,
+    loading,
+    error,
+    signInForTenantAccess,
+    createTenant,
+    addMember,
+    removeMember,
+  };
 }

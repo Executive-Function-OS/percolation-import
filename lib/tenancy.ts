@@ -6,6 +6,7 @@ import {
   collectionGroup,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   query,
   serverTimestamp,
@@ -17,6 +18,13 @@ import {
 } from "firebase/firestore";
 
 export type TenantRole = "owner" | "member";
+
+export interface Tenant {
+  id: string;
+  name: string;
+  createdBy: string;
+  createdAt: Timestamp | FieldValue;
+}
 
 export interface TenantMembership {
   tenantId: string;
@@ -47,6 +55,14 @@ export async function createTenant(
     addedAt: serverTimestamp(),
   });
   return tenantRef.id;
+}
+
+/** Fetches a tenant's own doc (name, etc). Rejected by firestore.rules unless the caller is a member. */
+export async function getTenant(db: Firestore, tenantId: string): Promise<Tenant | null> {
+  const snap = await getDoc(doc(db, "tenants", tenantId));
+  if (!snap.exists()) return null;
+  const data = snap.data();
+  return { id: snap.id, name: data.name, createdBy: data.createdBy, createdAt: data.createdAt };
 }
 
 /** Adds or updates a member. Rejected by firestore.rules unless the caller is an owner. */
