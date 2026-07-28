@@ -11,7 +11,7 @@ EFOS is an open-source, client-side framework that converts naturalistic behavio
 ## 🔗 Project Resources
 * **Live Demo & Simulation:** [https://demo.executivefunctionos.com/](https://demo.executivefunctionos.com/)
 * **Repository Audits:** Code and validation tests are open-source.
-* **Academic Contact:** [anni@executivefunctionos.com](mailto:anni@executivefunctionos.com)
+* **Academic Contact:** [annika@executivefunctionos.com](mailto:annika@executivefunctionos.com)
 
 ---
 
