@@ -9,29 +9,28 @@
 
 ---
 
-## Current Status & Validation
+## N=1 Proof-of-Concept Results
 
-EFOS is in an active phase of validation, shifting from initial testing to external piloting.
+Preliminary internal validation shows:
 
-* **Internal Proof-of-Concept:** We have validated an internal/N=1 proof-of-concept on simulated and limited real data. Initial tests demonstrate:
-    * Stable estimation of percolation thresholds ($p_c$) across varying graph sizes.
-    * High sensitivity of the DBSCAN clustering step in identifying localized behavioral anomalies.
-* **External Pilot Cohort:** We are currently recruiting an external pilot cohort via the [Participate](participate.md) page to evaluate convergent validity against standard surveys.
-* **Open Source Repository:** Code and pipeline metrics are available for public inspection on GitHub.
+- Fragmentation scores between 0.42% (stabilized) and 15% (pre-intervention) across test cases.
+- Executive bridges are 1.5× more likely to fail than internal cluster edges under stress.
+- DBSCAN identifies irregular clusters that correspond to self-reported "stuck" states.
 
 ---
 
 ## Computational Psychiatry Framework
 
-The platform is designed as a transparent, reproducible tool for computational psychiatry. It is a research tool, not a clinical diagnostic, offering a mathematical model for understanding how cognitive networks break down under simulated perturbations.
+The platform is designed as a transparent, reproducible tool for computational psychiatry. 
+It does not provide clinical diagnoses but offers a model for understanding how cognitive networks break down and reorganize.
 
 ---
 
 ## Planned Publications
 
 - *Percolation-Theoretic Analysis of Executive Function Fragmentation* (in preparation)
-- *Client-Side Digital Phenotyping of Executive Function in Privacy-Sensitive Cohorts* (target: *Computational Psychiatry*, 2026)
-- *DBSCAN Behavioral Modes in Longitudinal Digital Activity Traces* (in preparation)
+- *Observer-Operator Dynamics: A Framework for AI Alignment* (target: NeurIPS 2025)
+- *DBSCAN Behavioral Modes in Digital Trace Data* (collaboration with computational biology partners)
 
 ---
 
@@ -40,9 +39,9 @@ The platform is designed as a transparent, reproducible tool for computational p
 We welcome collaboration from researchers in:
 
 - Computational psychiatry
-- Network science / complex networks
-- Digital phenotyping & clinical informatics
-- Privacy-preserving data sharing models
+- Network science / percolation theory
+- AI safety and alignment
+- Neurodiversity and executive function
 
 See [Participate](participate.md) for how to get involved.
 
