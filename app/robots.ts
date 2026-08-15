@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/api/', '/internal-docs'],
+      disallow: ['/api/', '/internal-docs', '/workspace'],
     },
     sitemap: 'https://demo.executivefunctionos.com/sitemap.xml',
   }

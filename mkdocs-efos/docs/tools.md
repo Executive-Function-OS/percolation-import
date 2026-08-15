@@ -1,8 +1,8 @@
-# Tools & Framework Comparisons
+# Tools
 
 ## BMS 4.0 Percolation Engine
 
-[**Analysis Engine**](/engine) — Client-side only. OAuth data ingestion and percolation exports. 
+[**Analysis Engine**](https://demo.executivefunctionos.com/engine) — Client-side only. OAuth data ingestion and percolation exports. 
 All processing stays in your browser — zero server access to your Drive.
 
 > **Research-grade privacy.** [Audit source](https://github.com/Executive-Function-OS/percolation-import)
@@ -11,30 +11,32 @@ All processing stays in your browser — zero server access to your Drive.
 
 ## Phase Simulator
 
-[**Interactive Visualization**](/simulator) — Watch how increasing stress degrades executive bridges between Observer and Operator.
+[**Interactive visualization**](https://demo.executivefunctionos.com/simulator) — Watch how increasing stress degrades executive bridges between Observer and Operator.
 
-**Cognitive State Percolation:** Executive bridge links fail at 1.5× probability compared to internal cluster nodes under simulated cognitive load.
+**Cognitive State Percolation:** Executive bridge links fail at 1.5× probability compared to internal cluster nodes.
 
 ---
 
-## Compare Section: Digital Phenotyping Frameworks
+## Battle Map (Archive)
 
-To contextualize EFOS within the computational psychiatry landscape, the following matrix compares EFOS with the two leading open-source digital phenotyping platforms:
+[**The Terrain Before the Theory**](https://demo.executivefunctionos.com/battle-map)
 
-| Feature / Metric | mindLAMP (Cortex) | Beiwe | Executive Function OS (EFOS) |
-| :--- | :--- | :--- | :--- |
-| **Primary Focus** | Active surveys & passive sensor logs | High-throughput raw passive sensors | Passive naturalistic trace processing |
-| **Architecture** | Centralized server database | Centralized backend service center | **Fully local client-side (Zero-Knowledge)** |
-| **Model Type** | Statistical time-series features | High-throughput behavioral metrics | **Percolation network analysis + DBSCAN** |
-| **Data Ingestion** | Custom app logs, centralized API | Custom app logs, centralized API | Local document/activity trace import (OAuth) |
-| **Cohort Suitability** | General clinical studies | Monitored clinical cohorts | **Privacy-sensitive research cohorts** |
-| **Diagnostics** | Research/clinical capture support | Research capture support | **Research tool (Not a clinical diagnostic)** |
+This is the conceptual system that helped define the territory before it could be modeled computationally. 
+It preserves the original language layer that made the computational model possible.
 
-### Differentiating Claims
+### Compass Framework
 
-1. **Fully Local Computation:** Unlike mindLAMP and Beiwe, which rely on centralized databases and server-side feature extraction, EFOS executes all algorithms (DBSCAN and percolation graphs) directly on the user's device. No raw trace data leaves the client.
-2. **Structural percolation modeling:** Instead of simple statistical aggregates of activity, EFOS models the structural topology of executive function as a network, estimating percolation thresholds ($p_c$) to model task-paralysis states.
-3. **Privacy-Preserving Outputs:** EFOS generates structured phenotypes (PDF, GraphML, CSV, JSON) directly on-device. Researchers receive high-level network metrics rather than raw interaction logs, drastically reducing IRB friction.
+A four-layer decision matrix for continuous reassessment:
+
+1. **Internal State Assessment** → Internal State Score (0-100)
+2. **External System Assessment** → System Profile with Type & Timeline
+3. **Resource Inventory** → Resource Matrix
+4. **Action Set Selection** → Navigation Prescription
+
+### Spoon Inventory (from disability activism)
+- How many units of energy available today?
+- How many committed to survival tasks?
+- How many available for navigation work?
 
 ---
 
