@@ -105,9 +105,11 @@ export default function ResearchersPage() {
           </div>
           
           <div className="flex justify-center mt-8">
-            <Button className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-6 rounded-xl text-lg flex items-center gap-2">
-              <Mail className="w-5 h-5" />
-              Contact Research Team
+            <Button asChild className="bg-slate-900 hover:bg-slate-800 text-white px-8 py-6 rounded-xl text-lg flex items-center gap-2">
+              <a href="mailto:annika@executivefunctionos.com">
+                <Mail className="w-5 h-5" />
+                Contact Research Team
+              </a>
             </Button>
           </div>
         </section>

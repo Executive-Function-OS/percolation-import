@@ -41,5 +41,44 @@ service cloud.firestore {
     match /{path=**}/raw_trace_logs/{doc} {
       allow read, write: if false;
     }
+
+    // Tenant/workspace foundation for multi-tenant collaboration (e.g. shared
+    // case-file analysis with external partners). This deliberately only
+    // covers membership and isolation, not any specific feature's data —
+    // future collections (documents, retrieval indexes, etc.) should nest
+    // under /tenants/{tenantId}/... and rely on isMember()/isOwner() below.
+    match /tenants/{tenantId} {
+      function isMember() {
+        return request.auth != null &&
+          exists(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid));
+      }
+      function isOwner() {
+        return isMember() &&
+          get(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid)).data.role == 'owner';
+      }
+
+      allow get: if isMember();
+      allow list: if false; // no enumerating tenants you don't belong to
+      allow create: if request.auth != null && request.resource.data.createdBy == request.auth.uid;
+      allow update, delete: if isOwner();
+
+      match /members/{memberUid} {
+        allow get, list: if isMember();
+
+        // Bootstrap: the tenant's creator may add themselves as owner once,
+        // immediately after creating the tenant doc, while no member exists yet.
+        allow create: if request.auth != null &&
+          memberUid == request.auth.uid &&
+          request.resource.data.role == 'owner' &&
+          !exists(/databases/$(database)/documents/tenants/$(tenantId)/members/$(request.auth.uid)) &&
+          get(/databases/$(database)/documents/tenants/$(tenantId)).data.createdBy == request.auth.uid;
+
+        // Ongoing membership management is owner-only. `delete` has no
+        // request.resource to validate a role against, so it's split out.
+        allow create, update: if isOwner() &&
+          (request.resource.data.role == 'owner' || request.resource.data.role == 'member');
+        allow delete: if isOwner();
+      }
+    }
   }
 }

@@ -41,7 +41,11 @@ export default function PrivacyPolicy() {
 
       <h2 className="text-xl font-semibold mt-8 mb-4">Contact Us</h2>
       <p className="mb-4">
-        If you have any questions about this Privacy Policy, please contact us.
+        If you have any questions about this Privacy Policy, please contact us at{" "}
+        <a href="mailto:annika@executivefunctionos.com" className="underline hover:text-foreground">
+          annika@executivefunctionos.com
+        </a>
+        .
       </p>
     </div>
   );

@@ -310,7 +310,7 @@ export default function ArchitecturePage() {
             <Link href="/" className="px-6 py-2 rounded-full border border-border bg-card hover:bg-slate-50 transition-colors text-sm font-semibold">
               Methods Overview
             </Link>
-            <a href="mailto:contact@example.com" className="px-6 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white transition-colors text-sm font-semibold">
+            <a href="mailto:annika@executivefunctionos.com" className="px-6 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white transition-colors text-sm font-semibold">
               Questions? Contact
             </a>
           </div>
