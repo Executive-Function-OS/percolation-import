@@ -14,6 +14,7 @@ hide:
 -   :material-chart-line: **Methodology** · **From behavioral trace to structural phenotype**
 -   :material-code-braces: **Tools** · **Integrate with analysis pipelines**
 -   :material-science: **Research** · **Computational psychiatry & digital phenotyping**
+-   :material-scale-balance: **[PALADIN](paladin.md)** · **Computational legal biophysics & docket integrity**
 
 </div>
 
@@ -31,11 +32,31 @@ Executive Function OS (EFOS) is an open-source, client-side framework that conve
 
     Leverage our structured local outputs (PDF, GraphML, CSV, JSON) for downstream statistical analysis and AI pipelines without exposure of raw interaction data. See the [Tools](tools.md) page.
 
+=== "⚖️ Procedural Justice & Legal Informatics"
+
+    Discover how EFOS's network percolation and stress mechanics extend into pro se legal defense through **[PALADIN](paladin.md)**. PALADIN uses Cellular Potts Modeling (CPM) and Monte Carlo energy minimization to audit court dockets, shielding traumatized and neurodivergent litigants from Rule 8(a)(2) procedural forfeiture.
+
 === "🛠️ Code Contributors & Auditors"
 
     Audit our local calculation core or contribute to the open codebase. Read the [architecture overview](https://github.com/Executive-Function-OS/percolation-import) and explore the [HybridRAG pipeline](methodology.md#hybridrag-expansion).
 
 ---
+
+## :material-scale-balance: Legal Biophysics Extension: PALADIN
+
+!!! tip "PALADIN Research Portal & Live Simulation Engine"
+    **[P.A.L.A.D.I.N. (Pleadings, Audit, Litigation Analytics, & Docket Integrity Network)](https://executive-function-os.github.io/paladin/)** bridges computational biophysics and civil rights defense. By establishing a formal mathematical isomorphism between the Cellular Potts Model (CPM) of tissue morphogenesis and court evidentiary dockets, PALADIN automates forensic docket auditing with zero external API dependencies.
+
+    * **Live Interactive Portal**: [https://executive-function-os.github.io/paladin/](https://executive-function-os.github.io/paladin/)
+    * **GitHub Repository**: [github.com/Executive-Function-OS/paladin](https://github.com/Executive-Function-OS/paladin)
+    * **Pre-Print Manuscript**: *PALADIN: Multi-Scale Forensic Informatics, Monte Carlo Energy Minimization, and Cellular Potts Modeling for Pro Se Civil Rights Defense*
+    * **Empirical Validation**: 96.2% procedural entropy reduction demonstrated in *Eriksson & Buckhout v. City of Oregon City* (D. Or. Case No. 3:26-cv-01885-IM).
+
+[Explore PALADIN Portal :material-arrow-right:](https://executive-function-os.github.io/paladin/){ .md-button .md-button--primary }
+[Read PALADIN Docs :material-arrow-right:](paladin.md){ .md-button }
+
+---
+
 
 ## About the Project
 

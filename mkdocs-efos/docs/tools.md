@@ -38,9 +38,23 @@ To contextualize EFOS within the computational psychiatry landscape, the followi
 
 ---
 
+## PALADIN: Forensic Docket Auditing & Legal Biophysics Engine
+
+[**PALADIN Research Portal & Simulator**](https://executive-function-os.github.io/paladin/) · [**Documentation**](paladin.md)
+
+PALADIN formalizes the isomorphism between the Cellular Potts Model (CPM) of biophysical tissue morphogenesis and court evidentiary structures, providing pro se litigants with an externalized executive function prosthesis.
+
+* **Simulation Engine**: Metropolis Monte Carlo simulated annealing minimizing pleading entropy.
+* **Procedural Safeguard**: Automatic Rule 8(a)(2) defect purging and 5-element claim volume enforcement.
+* **Zero External Overhead**: 100% local Python 3.10+ execution with zero API or token costs.
+* **Source Repository**: [github.com/Executive-Function-OS/paladin](https://github.com/Executive-Function-OS/paladin)
+
+---
+
 ## Upcoming Tools
 
 - **Conversation State Visualizer** (Knowledge Graph + Timeline)
 - **Executive Function Gap Detector** (LLM Pattern Detection)
 - **Procedural Bottleneck Analyzer** (Graph Analysis)
 - **Observer/Operator Divergence Tracker** (Text Classification)
+
